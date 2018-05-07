@@ -24,6 +24,12 @@
     
     Lint checks the entire 'src' directory.
     
+- ##### lint auto
+
+    ```npm run lint-auto```
+    
+    Lint checks the entire 'src' directory and corrects code where possible.
+    
 #### frontend
 
 - ##### dev
