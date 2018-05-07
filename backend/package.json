@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "keywords": [],
   "scripts": {
     "test": "jest",
     "prebuild": "npm run lint",
@@ -13,7 +14,8 @@
   "author": "Team Flyboi & Friends",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongoose": "^5.0.17"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
