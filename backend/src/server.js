@@ -22,7 +22,7 @@ module.exports = (ip, port) => {
 
         }
 
-        console.log(`Server running on ${ip}:${port}`);
+        console.log(`Server (backend) running on ${ip}:${port}`);
 
     });
 

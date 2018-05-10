@@ -7,8 +7,11 @@ const path = require('path');
 const app = express();
 
 
-const port = 8080;
+const port = process.argv[2] || 8080;
+const ip = process.argv[3] || '127.0.0.1';
 
 app.use('/', express.static(path.join(__dirname, 'dist')));
 
-app.listen(port);
+app.listen(port, ip, function(){
+    console.log(`'dist' served on ${ip}:${port}`)
+});
