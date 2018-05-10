@@ -5,14 +5,14 @@ const Book = require('./bookModel');
 
 mongoose.Promise = global.Promise;
 const dbConnectionOpts = {
-    reconnectInterval: 1000,
-    reconnectTries: Number.MAX_VALUE
+    'reconnectInterval': 1000,
+    'reconnectTries': Number.MAX_VALUE
 };
 
 exports.connect = () => {
 
-    mongoose.connect(process.env.MONGO_URL, dbConnectionOpts)
-        .catch((err) => {
+    mongoose.connect(process.env.MONGO_URL, dbConnectionOpts).
+        catch((err) => {
 
             console.log(err);
 
@@ -57,10 +57,13 @@ exports.nearGeo = (lng, lat) => {
 
     mongoose.connection.db.collection('cities').aggregate([
         {
-            $geoNear: {
-                near: {
-                    coordinates: [lat, lng],
-                    type: 'Point'
+            '$geoNear': {
+                'near': {
+                    'coordinates': [
+                        lat,
+                        lng
+                    ],
+                    'type': 'Point'
                 },
                 distanceField: 'dist.calculated',
                 maxDistance,

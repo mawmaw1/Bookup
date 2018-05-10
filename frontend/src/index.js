@@ -10,10 +10,6 @@ React.toString();
 
 const title = 'Bookup lolsdf dd ff';
 
-// window.jQuery = window.$ = require('jquery')
-// require('bootstrap/dist/css/bootstrap.min.css')
-// require('bootstrap/dist/js/bootstrap.min.js')
-
 ReactDOM.render(
     <App />,
     document.getElementById('app')
