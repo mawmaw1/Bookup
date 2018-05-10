@@ -23,10 +23,12 @@ exports.disconnect = () => mongoose.disconnect();
 exports.getCities = () => City.find({}).limit(10);
 
 exports.getBooksMetionCity = (cityName) => {
+
     mongoose.connection.db.collection('cities').aggregate([
         { $match: { cityName } },
         { $project: {} }
     ]);
+
 };
 
 exports.nearGeo = (lng, lat) => {
