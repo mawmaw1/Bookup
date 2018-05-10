@@ -5,9 +5,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-React.toString(); // ESLint failer uden den her linje ...
+// ESLint failer uden den her linje ...
+React.toString();
 
-const title = 'Bookup lolsdf';
+const title = 'Bookup lolsdf dd';
 
 ReactDOM.render(
     <div>{title}</div>,
