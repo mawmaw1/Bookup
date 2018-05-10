@@ -1,6 +1,12 @@
 # Bookup
 
+## IP's
 
+Postgræs:
+212.47.237.59:7655
+
+Jenkins:
+51.15.255.3:8080
 
 ## npm scripts
 
