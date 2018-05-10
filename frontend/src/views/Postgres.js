@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 
 class Postgres extends React.Component {
-    render() {
+    render () {
         return (
             <div className="jumbotron">
-                <h1 className="display-3">Team Boners har små kukke</h1>
+                <h1 className="display-3">Krissen har en liten kuk</h1>
             </div>
-        )
+        );
     }
 }
 
-export default Postgres
+export default Postgres;

@@ -1,6 +1,6 @@
 const server = require('./dist/server');
 
-const ip = process.argv[2];
-const port = process.argv[3];
+const port = process.argv[2] || 8081;
+const ip = process.argv[3] || '127.0.0.1';
 
 server(ip, port);

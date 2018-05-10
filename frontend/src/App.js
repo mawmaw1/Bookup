@@ -1,18 +1,17 @@
+import React, {Component} from 'react';
+import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';
 
-import React, { Component } from 'react';
-import { Route, Switch, BrowserRouter, HashRouter } from 'react-router-dom'
-
-import Mongo from './views/Mongo'
-import Postgres from './views/Postgres'
-import NavBar from './components/NavBar'
+import Mongo from './views/Mongo';
+import Postgres from './views/Postgres';
+import NavBar from './components/NavBar';
 
 class App extends Component {
-    render() {
+    render () {
         return (
             <HashRouter>
                 <div className="App">
                     <div className="">
-                        
+
                         <NavBar />
 
 
@@ -23,8 +22,8 @@ class App extends Component {
 
 
             </HashRouter>
-        )
+        );
     }
 }
 
-export default App
+export default App;
