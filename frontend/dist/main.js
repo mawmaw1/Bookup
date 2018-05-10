@@ -331,7 +331,7 @@ eval("\n\nif (false) {} else {\n  module.exports = __webpack_require__(/*! ./cjs
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\r\n * Created by Kristian Nielsen on 02-05-2018.\r\n */\n\n_react2.default.toString();\n\nvar title = 'Bookup';\n\n_reactDom2.default.render(_react2.default.createElement(\n  'div',\n  null,\n  title\n), document.getElementById('app'));\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar _react = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactDom = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\nvar _reactDom2 = _interopRequireDefault(_reactDom);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\n/**\n * Created by Kristian Nielsen on 02-05-2018.\n */\n\n_react2.default.toString(); // ESLint failer uden den her linje ...\n\nvar title = 'Bookup lolsdf';\n\n_reactDom2.default.render(_react2.default.createElement(\n  'div',\n  null,\n  title\n), document.getElementById('app'));\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ })
 

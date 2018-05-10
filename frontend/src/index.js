@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 
 React.toString(); // ESLint failer uden den her linje ...
 
-const title = 'Bookup';
+const title = 'Bookup lolsdf';
 
 ReactDOM.render(
     <div>{title}</div>,
