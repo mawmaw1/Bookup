@@ -12,12 +12,13 @@ module.exports = {
     module: {
         rules: [
             {
-                enforce: "pre",
+
                 test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
                 loader: "eslint-loader",
+                exclude: /node_modules/,
+                include: path.resolve(process.cwd(), 'src'),
+                enforce: "pre",
                 options: {
-                    cache: true,
                     fix: true
                 }
             },
