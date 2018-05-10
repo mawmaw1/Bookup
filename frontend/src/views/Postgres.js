@@ -2,7 +2,11 @@ import React from 'react'
 
 class Postgres extends React.Component {
     render() {
-        return <div>hej med dig sdafas</div>
+        return (
+            <div className="jumbotron">
+                <h1 className="display-3">Team Boners har små kukke</h1>
+            </div>
+        )
     }
 }
 
