@@ -1,16 +1,20 @@
-/**
- * Created by Kristian Nielsen on 02-05-2018.
- */
-
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from './App'
 
-// ESLint failer uden den her linje ...
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// ESLint failer uden den her linje ... nå
 React.toString();
 
-const title = 'Bookup lolsdf dd';
+const title = 'Bookup lolsdf dd ff';
+
+// window.jQuery = window.$ = require('jquery')
+// require('bootstrap/dist/css/bootstrap.min.css')
+// require('bootstrap/dist/js/bootstrap.min.js')
 
 ReactDOM.render(
-    <div>{title}</div>,
+    <App />,
     document.getElementById('app')
 );
