@@ -2,10 +2,13 @@
 
 ## IP's
 
-Postgræs:
+Psql (bois / *-rbra):
 212.47.237.59:7655
 
-Jenkins:
+Mongo (bois / *-rbra):
+212.47.237.59:7644
+
+Jenkins (bois / *-rbra):
 51.15.255.3:8080
 
 ## npm scripts
