@@ -8,7 +8,7 @@ const app = express();
 
 
 const port = process.argv[2] || 8080;
-const ip = process.argv[3] || '127.0.0.1';
+const ip = process.argv[3] || '0.0.0.0';
 
 app.use('/', express.static(path.join(__dirname, 'dist')));
 
