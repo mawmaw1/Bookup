@@ -18,6 +18,17 @@ test('get cities', async () => {
             expect(cities[0].cityName).toBeDefined();
         })
         .catch((err) => {
+            expect(err).toBeNull();
             console.log(err);
+        });
+});
+
+test('get books that reference paris', async () => {
+    await mongo.getBooksMetionCity('Paris')
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            expect(err).toBeNull();
         });
 });
