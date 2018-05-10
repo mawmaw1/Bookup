@@ -10,7 +10,7 @@
     "build": "flow",
     "postbuild": "flow-remove-types src/ --out-dir dist/ --pretty",
     "lint": "eslint src/**",
-    "lint-auto": "eslint src/** --fix"
+    "lint-auto": "eslint --fix src/**"
   },
   "author": "Team Flyboi & Friends",
   "license": "ISC",
