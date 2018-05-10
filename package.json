@@ -1,0 +1,13 @@
+{
+  "name": "bookup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "postinstall": "cd backend && npm cache verify && npm i && cd ../frontend && npm cache verify && npm i",
+    "lint-auto": "cd backend && npm run lint-auto && cd ../frontend && npm run lint-auto",
+    "build": "npm --prefix backend build | npm --prefix frontend build"
+  },
+  "author": "Team Flyboi & Friends",
+  "license": "ISC"
+}
