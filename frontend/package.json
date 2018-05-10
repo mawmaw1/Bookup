@@ -10,7 +10,7 @@
     "prebuild": "npm run lint",
     "test": "jest",
     "lint": "eslint src/**",
-    "lint-auto": "eslint src/** --fix"
+    "lint-auto": "eslint --fix src/**"
   },
   "author": "Team Flyboi & Friends",
   "license": "ISC",
