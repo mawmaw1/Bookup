@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
+
 const City = require('./cityModel');
+const Book = require('./bookModel');
 
 mongoose.Promise = global.Promise;
 const dbConnectionOpts = {
@@ -22,16 +24,36 @@ exports.disconnect = () => mongoose.disconnect();
 
 exports.getCities = () => City.find({}).limit(10);
 
-exports.getBooksMetionCity = (cityName) => {
+// Returns promise with books that mention the cityName
+exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
 
-    mongoose.connection.db.collection('cities').aggregate([
-        { $match: { cityName } },
-        { $project: {} }
-    ]);
+    // Can return multiple cities with same name
+    City.find({ cityName })
+        .then(async (cities) => {
+            let allBooks = [];
 
-};
+            for (const city of cities) {
+
+                const books = await Book.find({ cityRefs: city.cityId });
+
+                console.log(books);
+                allBooks = allBooks.concat(allBooks, books);
+
+            }
+
+            console.log('cities:', cities);
+            console.log('books:', allBooks);
+            resolve(allBooks);
+
+        })
+        .catch(reject);
+
+});
 
 exports.nearGeo = (lng, lat) => {
+
+    const maxDistance = 10000;
+    const limit = 10;
 
     mongoose.connection.db.collection('cities').aggregate([
         {
@@ -41,8 +63,8 @@ exports.nearGeo = (lng, lat) => {
                     type: 'Point'
                 },
                 distanceField: 'dist.calculated',
-                maxDistance: 100000,
-                num: 5,
+                maxDistance,
+                num: limit,
                 spherical: true
             }
         }
