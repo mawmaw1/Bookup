@@ -9,7 +9,8 @@
     "build": "webpack --mode production",
     "prebuild": "npm run lint",
     "test": "jest",
-    "lint": "eslint src/**"
+    "lint": "eslint src/**",
+    "lint-auto": "eslint src/** --fix"
   },
   "author": "Team Flyboi & Friends",
   "license": "ISC",
