@@ -1,12 +1,15 @@
-import React, {Component} from 'react';
+
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom'
+
 class App extends Component {
-    render () {
+    render() {
         return (
             <div>hej med dig lol
                 <button className="btn btn-primary">test</button>
             </div>
-        );
+        )
     }
 }
 
-export default App;
+export default App

@@ -1,20 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './App'
 
-import 'bootstrap';
+import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // ESLint failer uden den her linje ... nå
 React.toString();
 
 const title = 'Bookup lolsdf dd ff';
-
-/*
- * Window.jQuery = window.$ = require('jquery')
- * require('bootstrap/dist/css/bootstrap.min.css')
- * require('bootstrap/dist/js/bootstrap.min.js')
- */
 
 ReactDOM.render(
     <App />,
