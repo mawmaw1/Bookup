@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    cityId: Number,
-    cityName: String,
-    location: {
-        coordinates: [Number],
-        type: { type: String }
+    'cityId': Number,
+    'cityName': String,
+    'location': {
+        'coordinates': [Number],
+        'type': {'type': String}
     }
 });
 

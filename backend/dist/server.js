@@ -1,29 +1,19 @@
 const express = require('express');
+const morgan = require('morgan')
+
+const routes = require('./api/router')
 
 module.exports = (ip, port) => {
-
     const app = express();
 
-    app.get('/{id}', (req, res) => {
-
-        console.log(req.params);
-        res.send('Hello there');
-        res.end();
-
-    });
+    app.use(morgan('dev'))
+    app.use(routes)
 
     app.listen(port, ip, (err) => {
-
         if (err) {
-
             console.error(err);
-
             return;
-
         }
-
-        console.log(`Server running on ${ip}:${port}`);
-
+        console.log(`Server (backend) running on ${ip}:${port}`);
     });
-
 };

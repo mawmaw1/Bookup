@@ -17,7 +17,8 @@
   "dependencies": {
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "mongoose": "^5.0.17"
+    "mongoose": "^5.0.17",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
