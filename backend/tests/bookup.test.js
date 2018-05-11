@@ -19,14 +19,13 @@ test('get cities', async () => {
         })
         .catch((err) => {
             expect(err).toBeNull();
-            console.log(err);
         });
 });
 
 test('get books that reference paris', async () => {
-    await mongo.getBooksMetionCity('Paris')
+    await mongo.getBooksMetionCity('Rome')
         .then((res) => {
-            console.log(res);
+            expect(res.length).toBe(6)
         })
         .catch((err) => {
             expect(err).toBeNull();

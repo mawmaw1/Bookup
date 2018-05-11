@@ -45,14 +45,8 @@ Jenkins (bois / *-rbra):
 
     ```npm run dev```
     
-    Build command (development mode). Runs  webpack bundling, outputs to the 'dist' directory.
+    Piped command, will run webpack with --watch and run the 'index' file. Will continually build each time files in 'src' are changed
     
-    
-- ##### dev-watch
-
-    ```npm run dev-watch```
-    
-    Builds same as **dev** and continually watches for file-changes (builds on change).
     
 - ##### build
 
@@ -73,3 +67,10 @@ Jenkins (bois / *-rbra):
     ```npm run lint```
     
     Lint checks the entire 'src' directory.
+
+
+- ##### lint
+
+    ```npm run lint```
+    
+    Lint checks the entire 'src' directory, fixes errors where possible.
