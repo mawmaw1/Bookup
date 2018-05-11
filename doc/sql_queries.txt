@@ -1,0 +1,64 @@
+
+  1. Given a city name, your application returns all book titles with corresponding authors that mention this city.
+
+  select Book.title,  FROM Book
+  join Book_City USING bookid
+  join Book_Author using bookid  
+  join City using cityid
+  join Author using authorid  
+  WHERE City.name = {name}
+
+
+  output:
+
+  title		author
+
+  Moby Dick	Magnus Larsen
+  Moby Dick	Kristoffer Noga
+  
+  - - -  
+
+
+  2. Given a book title, your application plots all cities mentioned in this book onto a map.
+
+  SELECT City.* from Book
+  join Book_City using bookid
+  join City using cityid
+  where Book.title = {title}
+
+  
+  output:
+
+  cityid	name		lat	long
+ 
+  1		New York	12	13
+
+  - - -
+
+
+  3. Given an author name, your application lists all books written by that author and plots
+  all cities mentioned in any of the books onto a map.
+
+  select City.*, Book.*  FROM Book
+  join Book_City USING bookid
+  join Book_Author using bookid  
+  join City using cityid
+  join Author using authorid 
+  where Author.name = {name}
+
+  output:
+
+  cityid	name		lat	long	bookid	title
+
+  1		New York	12	13	3	Moby Dick	
+
+  - - -
+
+
+  4. Given a geolocation, your application lists all books mentioning a city in vicinity of the
+  given geolocation.
+
+  select Book.* FROM Book
+  join Book_City USING bookid
+  join City using cityid
+  where point (City.long, City.lat) <-> point ({long, lat}) < 10
