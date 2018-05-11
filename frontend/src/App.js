@@ -14,9 +14,11 @@ class App extends Component {
 
                         <NavBar />
 
+                        <Switch>
+                            <Route exact={true} path="/" component={Postgres} />
+                            <Route path="/mongo" component={Mongo} />
+                        </Switch>
 
-                        <Route exact={true} path="/" component={Postgres} />
-                        <Route path="/mongo" component={Mongo} />
                     </div>
                 </div>
 
