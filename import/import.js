@@ -43,9 +43,5 @@ fs.readdir(folder, (err, files) => {
                 console.log(e, file)
             }
         });
-
     })
-
 })
-
-
