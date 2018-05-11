@@ -15,6 +15,7 @@
         }
     },
     "rules": {
+        "no-console": "warn",
         /* flow rules */
         "flowtype/boolean-style": [
             2,

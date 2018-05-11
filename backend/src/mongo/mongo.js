@@ -10,14 +10,10 @@ const dbConnectionOpts = {
 };
 
 exports.connect = () => {
-
     mongoose.connect(process.env.MONGO_URL, dbConnectionOpts).
         catch((err) => {
-
             console.log(err);
-
         });
-
 };
 
 exports.disconnect = () => mongoose.disconnect();
@@ -33,18 +29,11 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
             let allBooks = [];
 
             for (const city of cities) {
-
-                const books = await Book.find({ cityRefs: city.cityId });
-
-                console.log(books);
+                const books = await Book.find({ cityRefs: city.cityId }, 'title authors');
                 allBooks = allBooks.concat(allBooks, books);
-
             }
 
-            console.log('cities:', cities);
-            console.log('books:', allBooks);
             resolve(allBooks);
-
         })
         .catch(reject);
 
