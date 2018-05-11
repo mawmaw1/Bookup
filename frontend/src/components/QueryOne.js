@@ -17,7 +17,7 @@ class QueryOne extends React.Component {
                 <div className="input-group mb-3">
                     <input type="text" className="form-control" placeholder={this.props.placeholder} />
                     <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="button" onClick={() => getData()} >Search</button>
+                        <button className="btn btn-outline-secondary" type="button" onClick={() => getData()}>Search</button>
                     </div>
                 </div>
             </div>

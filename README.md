@@ -11,6 +11,9 @@ Mongo (bois / *-rbra):
 Jenkins (bois / *-rbra):
 51.15.255.3:8080
 
+Den frontlige ende:
+http://212.47.237.59:8085
+
 ## npm scripts
 
 #### backend
