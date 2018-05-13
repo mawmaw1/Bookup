@@ -1,6 +1,7 @@
 import React from 'react';
 import QuerySelect from '../components/QuerySelect'
 import QueryOne from '../components/QueryOne'
+import DataTable from '../components/DataTable'
 import '../css/main.css'
 import { getPlaceholder } from '../helpers/helper'
 
@@ -23,6 +24,7 @@ class Postgres extends React.Component {
     }
 
     render() {
+        console.log(this.state.data)
         let placeholder = getPlaceholder(this.state.selectedQuery)
         return (
             <div className="col-md-12" style={{ marginTop: 20 }}>
@@ -35,6 +37,8 @@ class Postgres extends React.Component {
                     selectedQuery={this.state.selectedQuery} 
                     setData={(data) => this.setData(data)}
                 />
+
+                <DataTable data={this.state.data} />
 
             </div>
         );
