@@ -2,7 +2,7 @@ const express = require('express');
 const postgres = require('../postgres/postgres')
 const mongo = require('../mongo/mongo')
 
-mongo.connect()
+// mongo.connect()
 
 const router = new express.Router();
 const mongoRouter = new express.Router();
@@ -23,7 +23,7 @@ router.use('/postgres', postgresRouter)
 
 module.exports = router;
 
-function mongoQ1 (req, res) {
+function mongoQ1(req, res) {
     // Check input & errors
     mongo.getBooksMetionCity(req.query.city)
         .then((result) => {
@@ -32,22 +32,27 @@ function mongoQ1 (req, res) {
         .catch((err) => {
             console.log(err)
             res.status(500).end('error')
-        }) 
+        })
 }
 
-function mongoQ2 (req, res) {
-    res.json({x: "D"})
+function mongoQ2(req, res) {
+    res.json({ x: "D" })
 }
 
-function mongoQ3 (req, res) {
-    res.json({x: "D"})
+function mongoQ3(req, res) {
+    res.json({ x: "D" })
 }
 
-function mongoQ4 (req, res) {
-    res.json({x: "D"})
+function mongoQ4(req, res) {
+    res.json({ x: "D" })
 }
 
-function postgresQ1 (req, res) {
-    res.end(postgres.query1)
+async function postgresQ1(req, res) {
+    try {
+        let result = await postgres.query1()
+        res.json(result)
+    } catch (e) {
+        res.status(500).end(e)
+    }
 }
 //etc..

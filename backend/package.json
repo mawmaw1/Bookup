@@ -15,10 +15,12 @@
   "author": "Team Flyboi & Friends",
   "license": "ISC",
   "dependencies": {
+    "async": "^2.6.0",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mongoose": "^5.0.17",
-    "morgan": "^1.9.0"
+    "morgan": "^1.9.0",
+    "pg": "^7.4.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",
