@@ -10,10 +10,27 @@ class QueryOne extends React.Component {
         };
     }
 
-    render() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.data === null && prevProps !== this.props) {
+            this.setState({inputVal: ""})
+        }
+    }
 
+    render() {
         let getData = () => {
             // REST calls should be placed here. Remember to use this.props.setData(dataFromRest) when data has been fetched
+            if (this.props.selectedQuery === "1") {
+                axios.post('/postgres/query1', {
+                    title: this.state.inputVal
+                })
+                .then((res) => {
+                    this.props.setData(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
+
             if (this.props.selectedQuery === "2") {
                 axios.post('/postgres/query2', {
                     title: this.state.inputVal

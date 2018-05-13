@@ -1,7 +1,8 @@
 import React from 'react';
 import QuerySelect from '../components/QuerySelect'
 import QueryOne from '../components/QueryOne'
-import DataTable from '../components/DataTable'
+import DataTableTwo from '../components/DataTableTwo'
+import DataTableOne from '../components/DataTableOne'
 import '../css/main.css'
 import { getPlaceholder } from '../helpers/helper'
 
@@ -24,21 +25,22 @@ class Postgres extends React.Component {
     }
 
     render() {
-        console.log(this.state.data)
         let placeholder = getPlaceholder(this.state.selectedQuery)
         return (
             <div className="col-md-12" style={{ marginTop: 20 }}>
                 <h4>Select which query to use with the PostgreSQL database</h4>
                 
-                <QuerySelect setQuery={(q) => this.setQuery(q)} />
+                <QuerySelect setQuery={(q) => this.setQuery(q)} setData={() => this.setState({data: null})} />
                 
                 <QueryOne 
                     placeholder={placeholder} 
                     selectedQuery={this.state.selectedQuery} 
                     setData={(data) => this.setData(data)}
+                    data={this.state.data}
                 />
 
-                <DataTable data={this.state.data} />
+                <DataTableOne data={this.state.data} selectedQuery={this.state.selectedQuery} />
+                <DataTableTwo data={this.state.data} selectedQuery={this.state.selectedQuery} />
 
             </div>
         );

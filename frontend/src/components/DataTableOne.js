@@ -1,19 +1,14 @@
 import React from 'react'
 
-class DataTable extends React.Component {
+class DataTableOne extends React.Component {
     render() {
-        if (this.props.data !== null) {
-            let headers = Object.keys(this.props.data[0])
-            console.log(headers)
+        if (this.props.data !== null && this.props.selectedQuery === "1") {
             return (
                 <table className="table table-bordered">
                     <thead>
                         <tr>
-                            {
-                                headers.map((h, index) => {
-                                    return <th key={index}>{h}</th>
-                                })
-                            }
+                            <th>Book title</th>
+                            <th>Author name</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -21,10 +16,8 @@ class DataTable extends React.Component {
                             this.props.data.map((d, index) => {
                                 return (
                                     <tr key={index}>
-                                        <td>{d.cityid}</td>
+                                        <td>{d.title}</td>
                                         <td>{d.name}</td>
-                                        <td>{d.latitude}</td>
-                                        <td>{d.longitude}</td>
                                     </tr>
                                 )
                             })
@@ -34,8 +27,8 @@ class DataTable extends React.Component {
             )
         }
 
-        return <span>No data</span>
+        return <span></span>
     }
 }
 
-export default DataTable
+export default DataTableOne

@@ -14,8 +14,8 @@ mongoRouter.get('/query2', mongoQ2)
 mongoRouter.get('/query3', mongoQ3)
 mongoRouter.get('/query4', mongoQ4)
 
+postgresRouter.post('/query1', postgresQ1)
 postgresRouter.post('/query2', postgresQ2)
-postgresRouter.get('/query2', postgresQ2)
 postgresRouter.get('/query3', postgresQ2)
 postgresRouter.get('/query4', postgresQ2)
 
@@ -47,6 +47,15 @@ function mongoQ3(req, res) {
 
 function mongoQ4(req, res) {
     res.json({ x: "D" })
+}
+
+async function postgresQ1(req, res) {
+    try {
+        let result = await postgres.query1(req.body.title)
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).end(e)
+    }
 }
 
 async function postgresQ2(req, res) {
