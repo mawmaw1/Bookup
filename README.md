@@ -2,7 +2,7 @@
 
 ## IP's
 
-Psql (bois / *-rbra):
+Psql (postgres / *-rbra):
 212.47.237.59:7655
 
 Mongo (bois / *-rbra):
