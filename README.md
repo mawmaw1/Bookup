@@ -72,7 +72,7 @@ http://212.47.237.59:8085
     Lint checks the entire 'src' directory.
 
 
-- ##### lint
+- ##### lint-auto
 
     ```npm run lint```
     
