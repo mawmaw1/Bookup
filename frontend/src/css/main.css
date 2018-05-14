@@ -13,3 +13,11 @@
 .center {
     text-align: center;
 }
+
+.dis-block {
+    display: block;
+}
+
+.margin-bottom-20px {
+    margin-bottom: 20px;
+}
