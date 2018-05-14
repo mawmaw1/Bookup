@@ -14,6 +14,7 @@ class QuerySelect extends React.Component {
         let setQuery = (e) => {
             this.setState({selectedQuery: e.target.value})
             this.props.setQuery(e.target.value)
+            this.props.setData()
         }
 
         return (

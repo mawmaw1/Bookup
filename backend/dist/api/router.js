@@ -1,6 +1,7 @@
 const express = require('express');
 const postgres = require('../postgres/postgres')
 const mongo = require('../mongo/mongo')
+const cors = require('cors')
 
 // mongo.connect()
 
@@ -13,11 +14,12 @@ mongoRouter.get('/query2', mongoQ2)
 mongoRouter.get('/query3', mongoQ3)
 mongoRouter.get('/query4', mongoQ4)
 
-postgresRouter.get('/query1', postgresQ1)
-postgresRouter.get('/query2', postgresQ1)
-postgresRouter.get('/query3', postgresQ1)
-postgresRouter.get('/query4', postgresQ1)
+postgresRouter.post('/query1', postgresQ1)
+postgresRouter.post('/query2', postgresQ2)
+postgresRouter.get('/query3', postgresQ2)
+postgresRouter.get('/query4', postgresQ2)
 
+router.use(cors()) // burde nok fjernes og laves med proxy i stedet
 router.use('/mongo', mongoRouter)
 router.use('/postgres', postgresRouter)
 
@@ -49,8 +51,17 @@ function mongoQ4(req, res) {
 
 async function postgresQ1(req, res) {
     try {
-        let result = await postgres.query1()
-        res.json(result)
+        let result = await postgres.query1(req.body.title)
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).end(e)
+    }
+}
+
+async function postgresQ2(req, res) {
+    try {
+        let result = await postgres.query2(req.body.title)
+        res.json(result.rows)
     } catch (e) {
         res.status(500).end(e)
     }
