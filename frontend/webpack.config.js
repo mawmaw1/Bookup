@@ -2,7 +2,7 @@
  * Created by Kristian Nielsen on 02-05-2018.
  */
 const path = require('path');
-
+const Dotenv = require('dotenv-webpack');
 module.exports = {
     entry: { main: './src/index.js' },
     output: {
@@ -38,4 +38,10 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.jsx']
     },
+    node: {
+        fs: "empty"
+     },
+     plugins: [
+        new Dotenv()
+      ]
 };
