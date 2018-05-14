@@ -26,6 +26,8 @@ class Postgres extends React.Component {
 
     render() {
         let placeholder = getPlaceholder(this.state.selectedQuery)
+        let matches = this.state.data ? this.state.data.length : 0
+        
         return (
             <div className="col-md-12" style={{ marginTop: 20 }}>
                 <h4>Select which query to use with the PostgreSQL database</h4>
@@ -39,7 +41,7 @@ class Postgres extends React.Component {
                     data={this.state.data}
                 />
 
-                <DataTableOne data={this.state.data} selectedQuery={this.state.selectedQuery} />
+                <DataTableOne data={this.state.data} selectedQuery={this.state.selectedQuery} amount={matches} />
                 <DataTableTwo data={this.state.data} selectedQuery={this.state.selectedQuery} />
 
             </div>

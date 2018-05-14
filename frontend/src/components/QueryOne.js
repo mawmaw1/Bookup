@@ -49,11 +49,19 @@ class QueryOne extends React.Component {
         }
 
         return (
-            <div className="width-50p">
-                <div className="input-group mb-3">
-                    <input type="text" className="form-control" placeholder={this.props.placeholder} value={this.state.inputVal} onChange={inputChanged}  />
-                    <div className="input-group-append">
-                        <button className="btn btn-outline-secondary" type="button" onClick={() => getData()}>Search</button>
+            <div>
+                <div className="width-50p">
+                    <div className="input-group mb-3">
+                        <input type="text" className="form-control" placeholder={this.props.placeholder} value={this.state.inputVal} onChange={inputChanged} 
+                            onKeyPress={event => {
+                                if (event.key === "Enter") {
+                                    getData()
+                                }
+                            }}
+                        />
+                        <div className="input-group-append">
+                            <button className="btn btn-outline-secondary" type="button" onClick={() => getData()}>Search</button>
+                        </div>
                     </div>
                 </div>
             </div>
