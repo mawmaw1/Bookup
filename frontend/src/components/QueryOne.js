@@ -27,6 +27,7 @@ class QueryOne extends React.Component {
                     title: this.state.inputVal
                 })
                 .then((res) => {
+                    console.log(res.data)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {

@@ -2,7 +2,7 @@ import React from 'react'
 
 class DataTableOne extends React.Component {
     render() {
-        if (this.props.data !== null && this.props.selectedQuery === "2") {
+        if (this.props.data !== null && this.props.data.length > 0 && this.props.selectedQuery === "2") {
             let headers = Object.keys(this.props.data[0])
             return (
                 <table className="table table-bordered">
