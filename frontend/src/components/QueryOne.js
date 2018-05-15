@@ -64,7 +64,7 @@ class QueryOne extends React.Component {
                             }}
                         />
                         <div className="input-group-append">
-                            <button className="btn btn-outline-secondary" type="button" onClick={() => getData()}>Search</button>
+                            <button id="search-button" className="btn btn-outline-secondary" type="button" onClick={() => getData()}>Search</button>
                         </div>
                     </div>
                 </div>
