@@ -5,7 +5,7 @@
   "main": "index.js",
   "keywords": [],
   "scripts": {
-    "test": "jest",
+    "test": "jest --forceExit",
     "prebuild": "npm run lint",
     "build": "flow",
     "postbuild": "flow-remove-types src/ --out-dir dist/ --pretty",
