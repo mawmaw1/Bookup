@@ -11,7 +11,7 @@ const dbConnectionOpts = {
 
 exports.connect = () => {
     let url = 'mongodb://localhost:27017/gutenberg'
-    if (process.env.MONGO_URL && process.env.NODE_ENV !== 'test') {
+    if (process.env.MONGO_URL) {
         url = process.env.MONGO_URL
     }
     return mongoose.connect(url, dbConnectionOpts)
@@ -40,6 +40,7 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
                 allBooks = allBooks.concat(allBooks, books);
             }
 
+            allBooks = allBooks.splice(0, 100)
             resolve(allBooks);
         })
         .catch(reject);
@@ -59,7 +60,8 @@ exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
                     as: 'city',
                 }
         },
-        { $project: { 'city': true, '_id': false } }
+        { $project: { 'city': true, '_id': false } },
+        { $limit: 100 }
     ])
         .then(resolve)
         .catch(reject)
@@ -79,6 +81,7 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
                     as: 'city',
                 }
         },
+        { $limit: 100 }
     ])
         .then(resolve)
         .catch(reject)
@@ -113,7 +116,8 @@ exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
                     foreignField: 'cityRefs',
                     as: 'books',
                 }
-        }
+        },
+        { $limit: 100 }
     ])
         .then(resolve)
         .catch(reject)
