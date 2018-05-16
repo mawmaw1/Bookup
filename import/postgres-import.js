@@ -18,7 +18,6 @@ const jsonStringRaw = fs.readFileSync('books.json').toString();
 
 const parsed = JSON.parse(jsonStringRaw);
 
-const authorsIndex = {};
 const authors = [];
 
 const data = {
@@ -79,7 +78,6 @@ console.timeEnd('parsing json');
 const order = ['books', 'authors', 'book_authors', 'book_cities'];
 
 
-
 // option #1
 console.time('writing to string');
 order.forEach(key => {
@@ -98,9 +96,7 @@ console.timeEnd('writing to file');
 
 // option #2
 
-
 console.timeEnd('total');
-
 
 
 // functions below
@@ -133,14 +129,14 @@ function Book_City(bookid, cityid){
     this.toInsertString = getToInsertString(bookCityTableName);
 }
 
-function City(_cityid, name, lat, long){
-    assert({_cityid, name, lat, long});
-    this._cityid = _cityid;
-    this.name = name;
-    this.lat = lat;
-    this.long = long;
-    this.toInsertString = getToInsertString(cityTableName);
-}
+// function City(_cityid, name, lat, long){
+//     assert({_cityid, name, lat, long});
+//     this._cityid = _cityid;
+//     this.name = name;
+//     this.lat = lat;
+//     this.long = long;
+//     this.toInsertString = getToInsertString(cityTableName);
+// }
 
 function getToInsertString(tableName){
     return function(){
@@ -164,7 +160,7 @@ function sqlSanitizeVal(val){
     if(Number.isInteger(val)){
         return val;
     }else{
-        return "'" + val + "'";
+        return "'" + val.replace(/[']/g, '\'') + "'";
     }
 }
 
