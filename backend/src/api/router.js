@@ -26,7 +26,6 @@ router.use('/postgres', postgresRouter)
 module.exports = router;
 
 async function mongoQ1(req, res) {
-    console.log(req.body)
     if (!req.body.city) {
         return res.status(400).end('invalid')
     }
