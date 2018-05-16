@@ -21,9 +21,11 @@ class QueryOne extends React.Component {
 
     render() {
         let getData = () => {
+            let path = window.location.href.split('#')[1]
+            let dbPrefix = path === '/mongo' ? '/mongo' : '/postgres'
             // REST calls should be placed here. Remember to use this.props.setData(dataFromRest) when data has been fetched
             if (this.props.selectedQuery === "1") {
-                axios.post('/postgres/query1', {
+                axios.post(dbPrefix + '/query1', {
                     title: this.state.inputVal
                 })
                 .then((res) => {
@@ -36,10 +38,11 @@ class QueryOne extends React.Component {
             }
 
             if (this.props.selectedQuery === "2") {
-                axios.post('/postgres/query2', {
+                axios.post(dbPrefix + '/query2', {
                     title: this.state.inputVal
                 })
                 .then((res) => {
+                    console.log(res)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {
