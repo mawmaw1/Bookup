@@ -2,6 +2,8 @@
 import React from 'react'
 import axios from 'axios'
 
+console.log('process.env.BACKEND_HOST:', process.env.BACKEND_HOST);
+
 axios.defaults.baseURL = process.env.BACKEND_HOST;
 
 
@@ -26,11 +28,29 @@ class QueryOne extends React.Component {
             // REST calls should be placed here. Remember to use this.props.setData(dataFromRest) when data has been fetched
             if (this.props.selectedQuery === "1") {
                 axios.post(dbPrefix + '/query1', {
-                    title: this.state.inputVal
+                    city: this.state.inputVal
                 })
                 .then((res) => {
-                    console.log(res.data)
-                    this.props.setData(res.data)
+
+                    console.log('Query 1 response:',
+                        res.status,
+                        !res.data ? 'no data' : typeof res.data
+                    );
+
+
+
+                    if(res.data && res.data.length > 0){
+                        console.log('map should be defined:', res.data.map)
+                        res.data.forEach((el) => {
+                            if(!el.authors){
+                                console.log('element with not author array:')
+                                console.log(el)
+                            }
+                        })
+                        this.props.setData(res.data)
+                    }else{
+                        console.log('set data not called since no data was fetched');
+                    }
                 })
                 .catch((err) => {
                     console.log(err)
@@ -51,7 +71,7 @@ class QueryOne extends React.Component {
             }
 
             if (this.props.selectedQuery === "3") {
-                axios.post('/postgres/query3', {
+                axios.post(dbPrefix + '/query3', {
                     author: this.state.inputVal
                 })
                 .then((res) => {

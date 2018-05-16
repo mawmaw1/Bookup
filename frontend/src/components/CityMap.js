@@ -3,7 +3,7 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 class CityMap extends React.Component {
     render() {
-        let data = this.props.data ? this.props.data : []
+        let data = this.props.data || []
         const CityMapInner = withScriptjs(withGoogleMap((props) =>
                 <GoogleMap defaultZoom={3} defaultCenter={{ lat: 0, lng: 0 }}>
                     {
