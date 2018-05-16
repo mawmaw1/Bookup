@@ -3,6 +3,7 @@ import QuerySelect from '../components/QuerySelect'
 import QueryOne from '../components/QueryOne'
 import DataTableTwo from '../components/DataTableTwo'
 import DataTableOne from '../components/DataTableOne'
+import DataTableThree from '../components/DataTableThree'
 import CityMap from '../components/CityMap'
 import '../css/main.css'
 import { getPlaceholder } from '../helpers/helper'
@@ -54,6 +55,7 @@ class Postgres extends React.Component {
 
                 <DataTableOne data={this.state.data} selectedQuery={this.state.selectedQuery} amount={matches} />
                 <DataTableTwo data={this.state.data} selectedQuery={this.state.selectedQuery} />
+                <DataTableThree data={this.state.data} selectedQuery={this.state.selectedQuery} />
 
             </div>
         );
