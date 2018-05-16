@@ -6,12 +6,18 @@ const client = new Client({
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PW,
     port: process.env.POSTGRES_PORT,
+});
+
+client.connect().then(() => {
+    const e = (key) => process.env[key];
+    console.log('connected to',
+        `postgres://${e('POSTGRES_USER')}:${e('POSTGRES_PW')}@${e('POSTGRES_HOST')}:${e('POSTGRES_PORT')}/${e('POSTGRES_DB')}`)
+}).catch(err => {
+    console.log(err);
 })
 
-client.connect()
-
 client.on('error', (err) => {
-  console.error('something bad has happened!', err.stack)
+  console.error('there is something with wrong!', err.stack)
 })
 
 exports.query1 = (title) => {
