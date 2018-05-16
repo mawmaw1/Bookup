@@ -16,7 +16,7 @@ mongoRouter.post('/query4', mongoQ4)
 
 postgresRouter.post('/query1', postgresQ1)
 postgresRouter.post('/query2', postgresQ2)
-postgresRouter.get('/query3', postgresQ2)
+postgresRouter.post('/query3', postgresQ3)
 postgresRouter.get('/query4', postgresQ2)
 
 router.use(cors()) // burde nok fjernes og laves med proxy i stedet
@@ -26,7 +26,6 @@ router.use('/postgres', postgresRouter)
 module.exports = router;
 
 async function mongoQ1(req, res) {
-    console.log(req.body)
     if (!req.body.city) {
         return res.status(400).end('invalid')
     }
@@ -99,4 +98,13 @@ async function postgresQ2(req, res) {
         res.status(500).end(e)
     }
 }
-// etc..
+
+async function postgresQ3(req, res) {
+    try {
+        let result = await postgres.query3(req.body.author)
+        res.json(result.rows)
+    } catch (e) {
+        res.status(500).end(e)
+    }
+}
+//etc..
