@@ -46,6 +46,19 @@ class QueryOne extends React.Component {
                     console.log(err)
                 })
             }
+
+            if (this.props.selectedQuery === "3") {
+                axios.post('/postgres/query3', {
+                    author: this.state.inputVal
+                })
+                .then((res) => {
+                    console.log(res.data)
+                    this.props.setData(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
         }
 
         let inputChanged = (e) => {

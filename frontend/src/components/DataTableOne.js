@@ -31,8 +31,8 @@ class DataTableOne extends React.Component {
                                                 <td>{d.title}</td>
                                                 <td>
                                                     {
-                                                        d.array_agg.map((author, index) => {
-                                                            if(index === d.array_agg.length -1 ) {
+                                                        d.authors.map((author, index) => {
+                                                            if(index === d.authors.length -1 ) {
                                                                 return <span key={index}>{author}</span>
                                                             } else {
                                                                 return <span className="dis-block" key={index}>{author}</span>

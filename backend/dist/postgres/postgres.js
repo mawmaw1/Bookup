@@ -16,11 +16,11 @@ client.on('error', (err) => {
 
 exports.query1 = (title) => {
     const res = client.query(`
-        SELECT DISTINCT Book.bookid, Book.title, array_agg(Author.name) from Book
-        JOIN Book_City using (bookid) 
-        JOIN Book_Author using (bookid) 
-        JOIN City using (cityid) 
-        JOIN Author using (authorid) 
+        SELECT DISTINCT Book.bookid, Book.title, array_agg(Author.name) AS "authors" FROM Book
+        JOIN Book_City USING (bookid) 
+        JOIN Book_Author USING (bookid) 
+        JOIN City USING (cityid) 
+        JOIN Author USING (authorid) 
         WHERE City.name = '${title}' 
         GROUP BY Book.bookid
         ORDER BY Book.title; 
@@ -31,10 +31,23 @@ exports.query1 = (title) => {
 
 exports.query2 = (title) => {
     const res = client.query(`
-        SELECT City.* from Book
-        join Book_City using (bookid)
-        join City using (cityid)
-        where Book.title = '${title}'  
+        SELECT City.* FROM Book
+        JOIN Book_City USING (bookid)
+        JOIN City USING (cityid)
+        WHERE Book.title = '${title}';  
+    `)
+    return res
+}
+
+exports.query3 = (author) => {
+    const res = client.query(`
+    SELECT Book.*, array_to_json(array_agg(City.*)) AS "cities" FROM Book
+    JOIN Book_City USING (bookid) 
+    JOIN Book_Author USING (bookid) 
+    JOIN City USING (cityid) 
+    JOIN Author USING (authorid) 
+    WHERE Author.name = '${author}' 
+    GROUP BY Book.bookid;
     `)
     return res
 }
