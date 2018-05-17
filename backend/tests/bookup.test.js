@@ -50,11 +50,11 @@ test('test that mongo and postgres query 3 return the same amount', async () => 
 })
 
 test('test that mongo and postgres query 4 return the same amount', async () => {
-    const lng = -95, lat = 33
-    const proms = [mongo.getBooksNearLocation(lng, lat)]
+    const lng = 12.57, lat = 55.67
+    const proms = [postgres.query4(lat, lng), mongo.getBooksNearLocation(lng, lat)]
     try {
-        const [mres] = await Promise.all(proms)
-        // console.log(pres.rows.length)
+        const [pres, mres] = await Promise.all(proms)
+        console.log(pres.rows.length)
         console.log(mres.length)
         // expect(pres.rows.length).toBe(mres.length)
     } catch (err) {

@@ -41,7 +41,6 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
                 allBooks = allBooks.concat(allBooks, books);
             }
 
-            allBooks = allBooks.splice(0, 100)
             resolve(allBooks);
         })
         .catch(reject);
@@ -62,8 +61,7 @@ exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
                     as: 'city',
                 }
         },
-        { $project: { 'city': true, '_id': false } },
-        { $limit: 100 }
+        { $project: { 'city': true, '_id': false } }
     ])
         .then((cities) => {
             cities = cities.map((e) => {
@@ -91,8 +89,7 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
                     foreignField: 'cityId',
                     as: 'cities',
                 }
-        },
-        { $limit: 100 }
+        }
     ])
         .then((books) => {
             books.map((book) => {
@@ -113,8 +110,8 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
 
 // Given a geolocation, your application lists all books mentioning a city in vicinity of the given geolocation.
 exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
-    const maxDistance = 100000;
-    const limit = 10;
+    // "The equatorial radius of the Earth is approximately 3,963.2 miles or 6,378.1 kilometers."
+    const maxDistance = 10000;
 
     City.aggregate([
         {
@@ -128,7 +125,6 @@ exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
                 },
                 distanceField: 'dist.calculated',
                 maxDistance,
-                num: limit,
                 spherical: true
             }
         },
@@ -140,8 +136,7 @@ exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
                     foreignField: 'cityRefs',
                     as: 'books',
                 }
-        },
-        { $limit: 100 }
+        }
     ])
         .then((result) => {
             let books = []
