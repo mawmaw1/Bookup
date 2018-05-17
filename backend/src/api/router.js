@@ -83,7 +83,7 @@ async function mongoQ4(req, res) {
 
 async function postgresQ1(req, res) {
     try {
-        let result = await postgres.query1(req.body.title)
+        let result = await postgres.query1(req.body.city)
         res.json(result.rows)
     } catch (e) {
         res.status(500).end(e)
