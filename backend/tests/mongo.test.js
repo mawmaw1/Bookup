@@ -1,12 +1,11 @@
-const axios = require('axios')
-
-const mongo = require('../src/mongo/mongo');
-const server = require('../src/server')
 require('dotenv').load();
+const axios = require('axios')
+const mongo = require('../dist/mongo/mongo');
+const server = require('../dist/server')
 
 beforeAll(() => {
     server('localhost', 8080)
-    // return mongo.connect();
+    // return mongo.connect(); // started via server
 });
 
 afterAll(() => {
@@ -76,7 +75,7 @@ test('api get cities from The Federalist Papers book', async () => {
     try {
         const res = await axios.post('http://localhost:8080/mongo/query2', { title: 'The Federalist Papers'})
         // console.log(res.data)
-        expect(res.data.length).toBe(32)
+        expect(res.data.length).toBe(26)
     } catch (err) {
         expect(err).toBeNull()
     }
@@ -96,7 +95,7 @@ test('api get books from neaby cities to location', async () => {
     try {
         const res = await axios.post('http://localhost:8080/mongo/query4', { lng: -95, lat: 35})
         // console.log(res.data)
-        expect(res.data.length).toBe(19)
+        expect(res.data.length).toBe(86)
     } catch (err) {
         expect(err).toBeNull()
     }
