@@ -17,7 +17,7 @@ mongoRouter.post('/query4', mongoQ4)
 postgresRouter.post('/query1', postgresQ1)
 postgresRouter.post('/query2', postgresQ2)
 postgresRouter.post('/query3', postgresQ3)
-postgresRouter.get('/query4', postgresQ2)
+postgresRouter.post('/query4', postgresQ4)
 
 router.use(cors()) // burde nok fjernes og laves med proxy i stedet
 router.use('/mongo', mongoRouter)
@@ -104,6 +104,16 @@ async function postgresQ3(req, res) {
         let result = await postgres.query3(req.body.author)
         res.json(result.rows)
     } catch (e) {
+        res.status(500).end(e)
+    }
+}
+
+async function postgresQ4(req, res) {
+    try {
+        let result = await postgres.query4(req.body.lat, req.body.lng)
+        res.json(result.rows)
+    } catch (e) {
+        console.log(e)
         res.status(500).end(e)
     }
 }

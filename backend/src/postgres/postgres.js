@@ -22,14 +22,14 @@ client.on('error', (err) => {
 
 exports.query1 = (title) => {
     const res = client.query(`
-        SELECT DISTINCT Book.bookid, Book.title, array_agg(Author.name) AS "authors" FROM Book
-        JOIN Book_City USING (bookid) 
-        JOIN Book_Author USING (bookid) 
-        JOIN City USING (cityid) 
-        JOIN Author USING (authorid) 
-        WHERE City.name = '${title}' 
-        GROUP BY Book.bookid
-        ORDER BY Book.title; 
+        SELECT DISTINCT book.bookid, book.title, array_agg(author.name) AS "authors" FROM book
+        JOIN book_city USING (bookid) 
+        JOIN book_author USING (bookid) 
+        JOIN city USING (cityid) 
+        JOIN author USING (authorid) 
+        WHERE city.name = '${title}' 
+        GROUP BY book.bookid
+        ORDER BY book.title; 
     `)
 
     return res
@@ -37,23 +37,34 @@ exports.query1 = (title) => {
 
 exports.query2 = (title) => {
     const res = client.query(`
-        SELECT City.* FROM Book
-        JOIN Book_City USING (bookid)
-        JOIN City USING (cityid)
-        WHERE Book.title = '${title}';  
+        SELECT city.* FROM Book
+        JOIN book_city USING (bookid)
+        JOIN city USING (cityid)
+        WHERE book.title = '${title}';  
     `)
     return res
 }
 
 exports.query3 = (author) => {
     const res = client.query(`
-        SELECT Book.*, array_to_json(array_agg(City.*)) AS "cities" FROM Book
-        JOIN Book_City USING (bookid) 
-        JOIN Book_Author USING (bookid) 
-        JOIN City USING (cityid) 
-        JOIN Author USING (authorid) 
-        WHERE Author.name = '${author}' 
-        GROUP BY Book.bookid;
+        SELECT book.*, array_to_json(array_agg(city.*)) AS "cities" FROM book
+        JOIN book_city USING (bookid) 
+        JOIN book_author USING (bookid) 
+        JOIN city USING (cityid) 
+        JOIN author USING (authorid) 
+        WHERE author.name = '${author}' 
+        GROUP BY book.bookid;
+    `)
+    return res
+}
+
+exports.query4 = (lat, long) => {
+    const res = client.query(`
+        SELECT book.*, array_to_json(array_agg(city.*)) AS "cities" FROM book
+        JOIN book_city USING (bookid) 
+        JOIN city USING (cityid) 
+        WHERE position <-> point (${lat}, ${long}) < 10 
+        GROUP BY book.bookid;
     `)
     return res
 }

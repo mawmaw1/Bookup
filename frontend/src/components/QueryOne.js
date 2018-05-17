@@ -29,7 +29,6 @@ class QueryOne extends React.Component {
                     city: this.state.inputVal
                 })
                 .then((res) => {
-                    console.log(res.data)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {
@@ -42,7 +41,6 @@ class QueryOne extends React.Component {
                     title: this.state.inputVal
                 })
                 .then((res) => {
-                    console.log(res)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {
@@ -55,7 +53,6 @@ class QueryOne extends React.Component {
                     author: this.state.inputVal
                 })
                 .then((res) => {
-                    console.log(res.data)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {
@@ -64,9 +61,12 @@ class QueryOne extends React.Component {
             }
 
             if (this.props.selectedQuery === "4") {
+                let values = this.state.inputVal.split(',')
+                let lat = parseFloat(values[0])
+                let long = parseFloat(values[1])
                 axios.post(dbPrefix + '/query4', {
-                    lat: this.state.inputVal,
-                    lng: 0 //mja
+                    lat: lat,
+                    lng: long,
                 })
                 .then((res) => {
                     console.log(res.data)
@@ -80,6 +80,15 @@ class QueryOne extends React.Component {
 
         let inputChanged = (e) => {
             this.setState({inputVal: e.target.value})
+        }
+
+        let getExample = () => {
+            if (this.props.selectedQuery === "4") {
+                return (
+                    <div>Example string could be "40.71427, -74.00597" where the first value is latitude and the second value is longitude.</div>
+                )
+            }
+            return <span></span>
         }
 
         return (
@@ -98,6 +107,7 @@ class QueryOne extends React.Component {
                         </div>
                     </div>
                 </div>
+                {getExample()}
             </div>
         )
     }
