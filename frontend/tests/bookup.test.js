@@ -1,6 +1,6 @@
 const {Builder, By, Key, until} = require('selenium-webdriver');
 //const chrome = require('selenium-webdriver/chrome');
-
+require('dotenv').load();
 
 let driver
 
@@ -9,7 +9,6 @@ beforeAll(async () => {
     try{
         driver = await new Builder().forBrowser('chrome').usingServer('http://51.15.255.3:4444/wd/hub').build();
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
-        
     }
     catch(e){
         console.log(e)
