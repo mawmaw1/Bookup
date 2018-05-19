@@ -1,5 +1,4 @@
 const {Builder, By, Key, until} = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
 
 
 let driver
@@ -7,11 +6,8 @@ let driver
 
 beforeAll(async () => {
     try{
-        driver = await new Builder()
-        .forBrowser('chrome')
-        .setChromeOptions(new chrome.Options().headless())
-        .build();
-        await driver.get('http://localhost:8080/')
+        driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
+        await driver.get('http://51.15.255.3:8085/')
     }
     catch(e){
         console.log(e)
