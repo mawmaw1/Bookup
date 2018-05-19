@@ -8,7 +8,7 @@ let driver
 beforeAll(async () => {
     try{
         driver = await new Builder().forBrowser('chrome').usingServer('http://51.15.255.3:4444/wd/hub').build();
-        await driver.get('http://localhost:8080/')
+        await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
         
     }
     catch(e){
