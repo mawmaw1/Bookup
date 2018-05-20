@@ -116,7 +116,7 @@ class QueryOne extends React.Component {
             <div>
                 <div className="width-50p">
                     <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder={this.props.placeholder} value={this.state.inputVal} onChange={inputChanged} 
+                        <input id='queryInput' type="text" className="form-control" placeholder={this.props.placeholder} value={this.state.inputVal} onChange={inputChanged} 
                             onKeyPress={event => {
                                 if (event.key === "Enter") {
                                     getData()
