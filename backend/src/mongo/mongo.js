@@ -31,6 +31,7 @@ exports.getCities = () => City.find({}).limit(10);
 // Returns promise with books that mention the cityName
 exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
     // Can return multiple cities with same name
+    // todo use aggregation
     City.find({ cityName })
         .then(async (cities) => {
             let allBooks = [];
@@ -40,7 +41,6 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
                 allBooks = allBooks.concat(allBooks, books);
             }
 
-            allBooks = allBooks.splice(0, 100)
             resolve(allBooks);
         })
         .catch(reject);
@@ -48,6 +48,7 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
 
 // Given a book title, your application plots all cities mentioned in this book onto a map.
 exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
+    // todo no unwind
     Book.aggregate([
         { $match: { title } },
         { $unwind: '$cityRefs' },
@@ -60,8 +61,7 @@ exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
                     as: 'city',
                 }
         },
-        { $project: { 'city': true, '_id': false } },
-        { $limit: 100 }
+        { $project: { 'city': true, '_id': false } }
     ])
         .then((cities) => {
             cities = cities.map((e) => {
@@ -89,8 +89,7 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
                     foreignField: 'cityId',
                     as: 'cities',
                 }
-        },
-        { $limit: 100 }
+        }
     ])
         .then((books) => {
             books.map((book) => {
@@ -104,7 +103,6 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
                 delete book.cityRefs // todo project in query
                 return book
             })
-            console.log(books[0].cities)
             resolve(books)
         })
         .catch(reject)
@@ -112,8 +110,8 @@ exports.getCitiesAndBooksFromAuthor = (author) => new Promise((resolve, reject) 
 
 // Given a geolocation, your application lists all books mentioning a city in vicinity of the given geolocation.
 exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
-    const maxDistance = 100000;
-    const limit = 10;
+    // "The equatorial radius of the Earth is approximately 3,963.2 miles or 6,378.1 kilometers."
+    const maxDistance = 10000;
 
     City.aggregate([
         {
@@ -127,7 +125,6 @@ exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
                 },
                 distanceField: 'dist.calculated',
                 maxDistance,
-                num: limit,
                 spherical: true
             }
         },
@@ -139,8 +136,7 @@ exports.getBooksNearLocation = (lng, lat) => new Promise((resolve, reject) => {
                     foreignField: 'cityRefs',
                     as: 'books',
                 }
-        },
-        { $limit: 100 }
+        }
     ])
         .then((result) => {
             let books = []

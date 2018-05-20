@@ -31,26 +31,26 @@ class QueryOne extends React.Component {
                     city: this.state.inputVal
                 })
                 .then((res) => {
-
                     console.log('Query 1 response:',
                         res.status,
                         !res.data ? 'no data' : typeof res.data
                     );
 
-
-
                     if(res.data && res.data.length > 0){
                         console.log('map should be defined:', res.data.map)
-                        res.data.forEach((el) => {
-                            if(!el.authors){
-                                console.log('element with not author array:')
-                                console.log(el)
-                            }
-                        })
+                        // res.data.forEach((el) => {
+                        //     if(!el.authors){
+                        //         console.log('element with not author array:')
+                        //         console.log(el)
+                        //     }
+                        // })
                         this.props.setData(res.data)
                     }else{
                         console.log('set data not called since no data was fetched');
                     }
+
+                    this.props.setData(res.data)
+
                 })
                 .catch((err) => {
                     console.log(err)
@@ -62,7 +62,6 @@ class QueryOne extends React.Component {
                     title: this.state.inputVal
                 })
                 .then((res) => {
-                    console.log(res)
                     this.props.setData(res.data)
                 })
                 .catch((err) => {
@@ -73,6 +72,22 @@ class QueryOne extends React.Component {
             if (this.props.selectedQuery === "3") {
                 axios.post(dbPrefix + '/query3', {
                     author: this.state.inputVal
+                })
+                .then((res) => {
+                    this.props.setData(res.data)
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+            }
+
+            if (this.props.selectedQuery === "4") {
+                let values = this.state.inputVal.split(',')
+                let lat = parseFloat(values[0])
+                let long = parseFloat(values[1])
+                axios.post(dbPrefix + '/query4', {
+                    lat: lat,
+                    lng: long,
                 })
                 .then((res) => {
                     console.log(res.data)
@@ -86,6 +101,15 @@ class QueryOne extends React.Component {
 
         let inputChanged = (e) => {
             this.setState({inputVal: e.target.value})
+        }
+
+        let getExample = () => {
+            if (this.props.selectedQuery === "4") {
+                return (
+                    <div>Example string could be "40.71427, -74.00597" where the first value is latitude and the second value is longitude.</div>
+                )
+            }
+            return <span></span>
         }
 
         return (
@@ -104,6 +128,7 @@ class QueryOne extends React.Component {
                         </div>
                     </div>
                 </div>
+                {getExample()}
             </div>
         )
     }

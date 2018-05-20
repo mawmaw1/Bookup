@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node index | webpack --mode development --watch",
     "build": "webpack --mode production",
-    "test": "jest",
+    "test": "jest --forceExit",
     "start": "node index",
     "lint": "eslint src/**",
     "lint-auto": "eslint --fix src/**"

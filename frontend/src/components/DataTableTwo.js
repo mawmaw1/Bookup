@@ -3,16 +3,14 @@ import React from 'react'
 class DataTableTwo extends React.Component {
     render() {
         if (this.props.data !== null && this.props.data.length > 0 && this.props.selectedQuery === "2") {
-            let headers = Object.keys(this.props.data[0])
             return (
-                <table className="table table-bordered">
+                <table className="table table-striped table-bordered table-dark">
                     <thead>
                         <tr>
-                            {
-                                headers.map((h, index) => {
-                                    return <th key={index}>{h}</th>
-                                })
-                            }
+                            <th>City ID</th>
+                            <th>City name</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
                         </tr>
                     </thead>
                     <tbody>

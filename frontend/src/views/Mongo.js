@@ -8,22 +8,21 @@ import CityMap from '../components/CityMap'
 import '../css/main.css'
 import { getPlaceholder } from '../helpers/helper'
 
-
 class Mongo extends React.Component {
-    constructor (props) {
+    constructor(props) {
         super();
-        this.state = { 
+        this.state = {
             selectedQuery: "1",
-            data: null, 
+            data: null,
         };
     }
 
     setData(data) {
-        this.setState({data: data})
+        this.setState({ data: data })
     }
 
-    setQuery(q){
-        this.setState({selectedQuery: q})
+    setQuery(q) {
+        this.setState({ selectedQuery: q })
     }
 
     render() {

@@ -43,7 +43,6 @@ class DataTableOne extends React.Component {
                                             </tr>
                                         )
                                     }
-                                    return <tr key={index} className="noshow"></tr>
                                 })
                             }
                         </tbody>
