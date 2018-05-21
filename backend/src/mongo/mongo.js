@@ -38,7 +38,7 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
 
             for (const city of cities) {
                 const books = await Book.find({ cityRefs: city.cityId }, 'id title authors');
-                allBooks = allBooks.concat(allBooks, books);
+                allBooks = allBooks.concat(books);
             }
 
             resolve(allBooks);

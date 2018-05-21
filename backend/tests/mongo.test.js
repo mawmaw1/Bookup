@@ -25,8 +25,9 @@ test('get cities', async () => {
 
 test('get books that reference Rome', async () => {
     try {
-        const res = await mongo.getBooksMetionCity('Rome')
+        const res = await mongo.getBooksMetionCity('London')
         expect(res.length).toBeGreaterThan(0)
+        console.log(res.length)
     } catch (err) {
         expect(err).toBeNull();
     }
