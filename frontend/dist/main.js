@@ -1572,7 +1572,7 @@ eval("exports = module.exports = __webpack_require__(/*! ../../../css-loader/lib
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".width-50p {\\r\\n    width: 50%;\\r\\n}\\r\\n\\r\\n.not-fat {\\r\\n    font-weight: 100;\\r\\n}\\r\\n\\r\\n.noshow {\\r\\n    display: none;\\r\\n}\\r\\n\\r\\n.center {\\r\\n    text-align: center;\\r\\n}\\r\\n\\r\\n.dis-block {\\r\\n    display: block;\\r\\n}\\r\\n\\r\\n.margin-bottom-20px {\\r\\n    margin-bottom: 20px;\\r\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/css/main.css?./node_modules/css-loader");
+eval("exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ \"./node_modules/css-loader/lib/css-base.js\")(false);\n// imports\n\n\n// module\nexports.push([module.i, \".width-50p {\\n    width: 50%;\\n}\\n\\n.not-fat {\\n    font-weight: 100;\\n}\\n\\n.noshow {\\n    display: none;\\n}\\n\\n.center {\\n    text-align: center;\\n}\\n\\n.dis-block {\\n    display: block;\\n}\\n\\n.margin-bottom-20px {\\n    margin-bottom: 20px;\\n}\", \"\"]);\n\n// exports\n\n\n//# sourceURL=webpack:///./src/css/main.css?./node_modules/css-loader");
 
 /***/ }),
 
