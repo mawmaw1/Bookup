@@ -31,7 +31,32 @@ exports.getCities = () => City.find({}).limit(10);
 // Returns promise with books that mention the cityName
 exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
     // Can return multiple cities with same name
-    // todo use aggregation
+
+    // exceeds document size
+    // City.aggregate([
+    //     { $match: { cityName } },
+    //     {
+    //         $lookup:
+    //             {
+    //                 from: 'books',
+    //                 localField: 'cityId',
+    //                 foreignField: 'cityRefs',
+    //                 as: 'books',
+    //             }
+    //     },
+    //     { $project: { books: true } }
+    // ])
+    //     .then((cities) => {
+    //         let allBooks = [];
+            
+    //         for (let city of cities) {
+    //             allBooks = allBooks.concat(city.books)
+    //         }
+
+    //         resolve(allBooks);
+    //     })
+    //     .catch(reject);
+
     City.find({ cityName })
         .then(async (cities) => {
             let allBooks = [];
@@ -48,7 +73,6 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
 
 // Given a book title, your application plots all cities mentioned in this book onto a map.
 exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
-    // todo no unwind
     Book.aggregate([
         { $match: { title } },
         { $unwind: '$cityRefs' },
