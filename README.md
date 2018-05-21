@@ -9,7 +9,7 @@ Mongo (bois / *-rbra):
 212.47.237.59:7644
 
 Jenkins (bois / *-rbra):
-51.15.255.3:8080
+51.15.255.3:9090
 
 Den frontlige ende:
 http://212.47.237.59:8085
