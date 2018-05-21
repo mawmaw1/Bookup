@@ -73,7 +73,9 @@ async function mongoQ4(req, res) {
     }
 
     try {
+        console.log('mongo q4, lat, long:', req.body.lat, req.body.lng);
         const data = await mongo.getBooksNearLocation(req.body.lng, req.body.lat)
+        console.log('returning elements (amount):', data.length);
         res.json(data)
     } catch (e) {
         console.log(e)
@@ -110,6 +112,7 @@ async function postgresQ3(req, res) {
 
 async function postgresQ4(req, res) {
     try {
+
         let result = await postgres.query4(req.body.lat, req.body.lng)
         res.json(result.rows)
     } catch (e) {

@@ -31,7 +31,7 @@ class DataTableFour extends React.Component {
                                                 <td>{d.title}</td>
                                                 <td>
                                                     {
-                                                        d.cities.map((city, index) => {
+                                                        d.cities && d.cities.map((city, index) => {
                                                             if(index === d.cities.length -1 ) {
                                                                 return <span key={index}>{city.name}</span>
                                                             } else {

@@ -4,6 +4,7 @@ import QueryOne from '../components/QueryOne'
 import DataTableTwo from '../components/DataTableTwo'
 import DataTableOne from '../components/DataTableOne'
 import DataTableThree from '../components/DataTableThree'
+import DataTableFour from '../components/DataTableFour'
 import CityMap from '../components/CityMap'
 import '../css/main.css'
 import { getPlaceholder } from '../helpers/helper'
@@ -55,6 +56,7 @@ class Mongo extends React.Component {
                 <DataTableOne data={this.state.data} selectedQuery={this.state.selectedQuery} amount={matches} />
                 <DataTableTwo data={this.state.data} selectedQuery={this.state.selectedQuery} />
                 <DataTableThree data={this.state.data} selectedQuery={this.state.selectedQuery} />
+                <DataTableFour data={this.state.data} selectedQuery={this.state.selectedQuery} amount={matches} />
 
             </div>
         );
