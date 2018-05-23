@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('dotenv').load();
 
 const City = require('./cityModel');
 const Book = require('./bookModel');
@@ -14,6 +15,7 @@ exports.connect = () => {
     if (process.env.MONGO_URL) {
         url = process.env.MONGO_URL
     }
+
     return mongoose.connect(url, dbConnectionOpts)
         .then(() => {
             console.log('connected to ' + url)
