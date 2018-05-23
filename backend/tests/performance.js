@@ -59,13 +59,9 @@ async function runQueries(db, fns){
 }
 
 async function runner() {
-    const results = await Promise.all([
-        runQueries(mongo, ['getBooksMetionCity', 'getCitiesFromBook', 'getCitiesAndBooksFromAuthor', 'getBooksNearLocation']),
-        runQueries(postgres, ['query1', 'query2', 'query3', 'query4'])
-    ]);
 
-    const mongores = results[0];
-    const pgres = results[1];
+    const mongores = await runQueries(mongo, ['getBooksMetionCity', 'getCitiesFromBook', 'getCitiesAndBooksFromAuthor', 'getBooksNearLocation']);
+    const pgres = await runQueries(postgres, ['query1', 'query2', 'query3', 'query4']);
 
     console.log('');
     console.log('  RESULTS  ');
