@@ -8,17 +8,24 @@ const client = new Client({
     port: process.env.POSTGRES_PORT,
 });
 
-client.connect().then(() => {
-    const e = (key) => process.env[key];
-    console.log('connected to',
-        `postgres://${e('POSTGRES_USER')}:${e('POSTGRES_PW')}@${e('POSTGRES_HOST')}:${e('POSTGRES_PORT')}/${e('POSTGRES_DB')}`)
-}).catch(err => {
-    console.log(err);
-})
+exports.connect = () => {
+    client.connect().then(() => {
+        const e = (key) => process.env[key];
+        console.log('connected to',
+            `postgres://${e('POSTGRES_USER')}:${e('POSTGRES_PW')}@${e('POSTGRES_HOST')}:${e('POSTGRES_PORT')}/${e('POSTGRES_DB')}`)
+    }).catch(err => {
+        console.log(err);
+    })
+    
+    client.on('error', (err) => {
+      console.error('there is something with wrong!', err.stack)
+    })
+}
 
-client.on('error', (err) => {
-  console.error('there is something with wrong!', err.stack)
-})
+exports.disconnect = async() => {
+    await client.end()
+}
+
 
 exports.query1 = (title) => {
     const res = client.query(`
@@ -68,7 +75,8 @@ exports.query4 = (lat, long) => {
         JOIN book_city USING (bookid) 
         JOIN city USING (cityid) 
         WHERE position <@> point (${long}, ${lat}) < 6.21371192 
-        GROUP BY book.bookid;
+        GROUP BY book.bookid
+        ORDER BY book.title;
     `)
     return res
 }

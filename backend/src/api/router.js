@@ -4,6 +4,7 @@ const mongo = require('../mongo/mongo')
 const cors = require('cors')
 
 mongo.connect()
+postgres.connect()
 
 const router = new express.Router();
 const mongoRouter = new express.Router();

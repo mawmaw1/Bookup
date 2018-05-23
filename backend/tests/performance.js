@@ -37,6 +37,7 @@ async function runMongo() {
 }
 
 async function runPostgres() {
+    postgres.connect()
     console.time('postgres')
     let proms = []
     for (let c of cities) {
@@ -54,6 +55,7 @@ async function runPostgres() {
     const res = await Promise.all(proms)
     console.log(res.length)
     console.timeEnd('postgres')
+    postgres.disconnect()
 }
 
 async function runner() {

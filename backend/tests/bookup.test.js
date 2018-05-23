@@ -1,12 +1,14 @@
 require('dotenv').load();
 const mongo = require('../dist/mongo/mongo');
-const postgres = require('../dist/postgres/postgres')
+const postgres = require('../dist/postgres/postgres');
 
 beforeAll(() => {
+    postgres.connect()
     return mongo.connect();
 });
 
 afterAll(() => {
+    postgres.disconnect()
     mongo.disconnect()
 });
 
