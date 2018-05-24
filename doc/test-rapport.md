@@ -95,3 +95,26 @@ Denne løsning har sikret, at der har været en rød tråd i forbindelse med at 
 I forhold til den tid der skal afsættes til at opsætte og vedligeholde en CI/CD-kæde, kan man diskutere hvorvidt det er nødvendigt at have en sådan kæde til et projekt som dette. Det er bestemt ikke fuldstændig nødvendigt at have, og nogle ville argumentere for at tiden det kræver at opsætte og vedligeholde ikke er tiden og besværet værd. Vores argument for at have det er helt klart, at når et system vokser i kompleksitet og funktionalitet, bliver behovet for at have en funktionel CI/CD-kæde mere og mere aktuel og nødvendig, for at sikre at alle test- og deployment trin bliver gennemført på en standardiseret og ensformig måde, således at fejlbehæftet kode ikke bliver deployed. Dette gør sig især gældende, når man er et team der arbejder på forskellige funktioner i samme del af et system, hvilket ofte gjorde sig gældende i vores proces. Investeringen i en CI/CD-kæde var derfor en stor hjælp for os, og generelt mener vi at det er noget man altid bør have, når man udvikler et større system.
 
 
+## Ækvivalensklasser
+At teste med ækvivalensklasser (boundary values) er hvor man baserer sine tests på at afprøve ekstremerne, ved ens input værdier er de maksimale/minimale acceptable input samt lige udenfor hvad der er accepteret. Disse inputs der er gyldige og ugyldige, eller giver et andet resultat, bliver grupperet i de forskellige ækvivalensklasser.
+Både opsætningen og udførelsen af at henholdsvis opsætte ækvivalensklasser og lave test omkring dem kan hjælpe en del med tage højde for ugyldige inputs, som man normalt ikke tænker over.
+
+I vores projekt har vi ikke opstillet ækvivalensklasser, og i retrospektiv tror vi ikke at de ville have en særlig effekt på projektets funktionalitet. Idet at de input vi får bliver matched direkte i databases, så ville et input som “123” til at finde byer ikke give noget resultat, men ikke fejle.
+Det ville dog forbedre UX, i at brugeren ville få bedre respons på sit input, hvis for eksempel en brugers input overgår de gyldige input for latitude og longitude værdier, burde der komme et svar på hvilket værdi der ikke er gyldig.
+Ækvivalensklasserne for dette eksempel kunne dog se ud på følgende måde:
+
+![boundary](./boundary.png)
+
+
+## Cucumber
+Cucumber er et testing værktøj der fokuserer på hvilke features der skal laves og automatisk testes. Der er de features der bliver beskrevet i diverse feature filer der er rygraden for produktet, og kan blive brugt som dokumentation til kunden at features er lavet som de står.
+Værktøjet er bygget op om princippet Behavior Driven Development (BDD), der ligesom Cucumber har kundens interesse i fokus. I BDD bliver der hovedsageligt brugt et domain specifik language (DSL) der skal specificerer diverse features i et læsbart format, for det meste på engelsk, som de forskellige BDD værktøjer kan forstå.
+Cucumber har som sagt fokus på kunden og hvordan de forskellige features skal fungerer, og idet vi ikke har en ikke-teknisk “kunde”, der skal accepterer/beslutte en række features, og implementeringen, har vi ikke overvejet dette værktøj eller BDD
+
+## Mocking / stubbing
+Mocks er efterligninger af objekter, der har samme funktionalitet, men har det formål at verificerer et objekts adfærd ...
+Stubs er pre-programmed objekter der bliver brugt til at få noget “hardcoded” data eller adfærd, i en given test for at få testen til at virke korrekt. ...
+
+Vi gjorde ikke særlig brug af mocking eller stubbing da vi ikke løb ind i det problem at vi ikke havde nogen database eller backend klar, eller andre komplikationer. Idet at vores projekt har meget minimal kode og komplexitet, så vi ikke at vi ville få særlig meget ud af at mocke nogen objekters adfærd, da meget af komplexiteten lå i database søgningerne.
+De forskellige komponenter blev nogenlunde klar til at integrerer med hinanden på samme tid. Der blev dog stubbed nogle bøger (bl.a. “Tesla drømmen” af x. Noga) til noget manuelt testing af backend kald og UI. 
+
