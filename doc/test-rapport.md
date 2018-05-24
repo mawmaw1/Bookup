@@ -104,3 +104,11 @@ Mocks er efterligninger af objekter, der har samme funktionalitet, men har det f
 
 Vi gjorde ikke særlig brug af mocking eller stubbing da vi ikke løb ind i det problem at vi ikke havde nogen database eller backend klar, eller andre komplikationer. Da vores projekt har meget minimal kode og kompleksitet, besluttede vi, at vi ikke ville få særlig meget ud af at mocke nogen objekters adfærd, da meget af kompleksiteten lå i databasesøgningerne. De forskellige komponenter blev nogenlunde klar til at integrere med hinanden på samme tid. Der blev dog stubbed nogle bøger til noget manuelt testing af backend kald og UI.
 
+## Agil udvikling
+
+Undervejs i projektet har vi ikke haft stor fokus på user-stories eller retrospectives. Vi har generelt ikke følt at opgaven lagde op til disse metoder, da opgavebeskrivelsen var kort og ligetil, og opgaven havde ikke krav der blev ændret hen af vejen. Vi har i højere grad delt udviklingen op i sprints og har i de specifikke sprints haft fokus på forskellige dele af opgaven. 
+Således gik næsten de første to sprints alene med at få data ind i databasen da det viste sig at være en meget udfordrende opgave. Som beskrevet tidligere var det ikke natuligt for os at begynde at teste før vi havde fået styr på database-delen af opgaven. Dette var også grunden til at vi ikke brugte retrospectives, da vi i de to første sprints ikke havde så meget at gennemgå i test-delen af den samlede opgave. 
+
+Som team har vi fordelt opgaverne lige imellem os og har stået for specikke dele af systemet hver især. Vi har dog natuligt udført code reviews af hinandens kode hver gang der blev pushet på github. I den forbindelse har vi også sat hinanden ind i nyt kode og generelt har vi som team alle ageret udviklere og testere. 
+
+Generelt har den agile proces været mindre tilstedeværende i dette projekt end tidligere skoleopgaver. Det bunder mest i, at opgavebeskrivelsen som sagt var kort og præcis, og at vi ikke havde en product owner eller kravændringer undervejs. 
