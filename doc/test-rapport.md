@@ -29,7 +29,7 @@ Det mest brugbare lag i vores projekt har været unit-laget, da den mest essenti
 Vi har også tests i service-laget, som tester vores REST-API. De er med til at sikre, at serveren er oppe at køre korrekt og at vi kan tilgå vores databasekald korrekt gennem API’et. 
 
 Vi har brugt Selenium til at udføre tests i frontenden, men det har også været de mest omfattende tests at sætte op. Som det bliver beskrevet i test-pyramiden, bliver det dyrere jo højere op i lagene man går, og det har vi også oplevet i dette projekt. Først og fremmest er der meget manuelt arbejde involveret i at sætte Selenium op, og det er også tidskrævende at skrive tests, fordi man skal have styr på xpaths osv.
-Udover dette kræver Selenium også en driver for at virke. Det er relativt nemt at få til at virke på ens egen lokale computer, men det bliver en smule mere omfattende og kompliceret, når man gerne vil have sine Selenium-tests til at virke på den remote server vi bruger til at deploye alt koden. Den består af et simpelt Ubuntu-image og har derfor ikke en browser installeret. 
+Udover dette kræver Selenium også en driver for at virke. Det er relativt nemt at få til at virke på ens egen lokale computer, men det bliver en smule mere omfattende og kompliceret, når man gerne vil have sine Selenium-tests til at virke på den remote server vi bruger til at deploye alt koden. 
 
 ## The agile testing quadrants
 The agile testing quadrants giver et overblik over de forskellige typer tests, og kan være med til at sikre at man som team dækker alle slags tests. 
