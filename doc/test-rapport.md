@@ -111,8 +111,9 @@ Værktøjet er bygget op om princippet Behavior Driven Development (BDD), der li
 Cucumber har som sagt fokus på kunden og hvordan de forskellige features skal fungerer, og idet vi ikke har en ikke-teknisk “kunde”, der skal accepterer/beslutte en række features, og implementeringen, har vi ikke overvejet dette værktøj eller BDD
 
 ## Mocking / stubbing
-Mocks er efterligninger af objekter, der har samme funktionalitet, men har det formål at verificerer et objekts adfærd ...
-Stubs er pre-programmed objekter der bliver brugt til at få noget “hardcoded” data eller adfærd, i en given test for at få testen til at virke korrekt. ...
+Mocks er efterligninger af objekter, der har samme funktionalitet, men har det formål at verificerer et objekts adfærd og at spore objektets states. Der er findes en række test biblioteker der tilbyder funktionalitet til at verificerer at en bestemt metode er blevet kaldt, og at de bliver kaldt i den rigtige rækkefølge.
+Stubs er pre-programmed objekter der bliver brugt til at få noget “hardcoded” data eller adfærd, i en given test for at få testen til at virke korrekt. Man ville for eksempel kunne stubbe en database ved at implementerer en in-memory datastruktur der implementerer samme funktionalitet.
+Forskellen på mocks og stubs, er derved at mocks verificerer adfærden og stubs har et “canned” resultat til en specifik test. Derudover kan til forskel fra stubs, få ens tests til at fejle, hvis verificering ikke bliver opfyldt. Mock og stubs er begge det man kalder “test doubles”, hvor bl.a. “Fakes”, “spies” og “dummy objects” også hører under, der alle er har en forskellig rolle når det kommer til at teste med “doubles”.
 
 Vi gjorde ikke særlig brug af mocking eller stubbing da vi ikke løb ind i det problem at vi ikke havde nogen database eller backend klar, eller andre komplikationer. Idet at vores projekt har meget minimal kode og komplexitet, så vi ikke at vi ville få særlig meget ud af at mocke nogen objekters adfærd, da meget af komplexiteten lå i database søgningerne.
 De forskellige komponenter blev nogenlunde klar til at integrerer med hinanden på samme tid. Der blev dog stubbed nogle bøger (bl.a. “Tesla drømmen” af x. Noga) til noget manuelt testing af backend kald og UI. 
