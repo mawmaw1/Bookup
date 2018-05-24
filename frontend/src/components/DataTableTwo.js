@@ -13,7 +13,7 @@ class DataTableTwo extends React.Component {
                             <th>Longitude</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id = "query2Table">
                         {
                             this.props.data.map((d, index) => {
                                 return (

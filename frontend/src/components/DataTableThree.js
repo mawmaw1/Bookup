@@ -12,7 +12,7 @@ class DataTableThree extends React.Component {
                                 <th className="width-50p">Cities Mentioned</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id = "query3Table">
                             {
                                 this.props.data.map((d, index) => {
                                     return (
