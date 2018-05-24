@@ -90,7 +90,7 @@ At teste med ækvivalensklasser (boundary values) er hvor man baserer sine tests
 
 I vores projekt har vi ikke opstillet ækvivalensklasser, og i retrospektiv tror vi ikke at de ville have nogen effekt på projektets funktionalitet. Da alt input bliver matched direkte i databaser, ville et input som "123" til at finde byer ikke give noget resultat, men ikke fejle. Det ville dog forbedre UX fordi fordi brugeren ville få bedre respons på sit input, hvis eksempelvis en brugers input overgår de gyldige input for latitude og longitude værdier, burde der komme et svar på hvilken værdi, der ikke er gyldig. Ækvivalensklasserne for dette eksempel kunne dog se ud på følgende måde:
 
-![image alt text](image_0.png)
+![boundary](./boundary.png)
 
 ## **Cucumber**
 
