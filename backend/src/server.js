@@ -13,7 +13,7 @@ module.exports = (ip, port) => {
     app.use(bodyParser.json())
     app.use(routes)
 
-    app.use('/coverage', express.static(path.join(__dirname, './tests/coverage/lcov-report')))
+    app.use('/coverage', express.static(path.join(__dirname, '../tests/coverage/lcov-report')))
 
     app.listen(port, ip, (err) => {
         if (err) {
