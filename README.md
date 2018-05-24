@@ -4,8 +4,8 @@
 
 Direkte links til rapporter:
 
-#### [Database](https://github.com/mawmaw1/Bookup/doc/db-rapport.md)
-#### [Test](https://github.com/mawmaw1/Bookup/doc/test-rapport.md)
+#### [Database](https://github.com/mawmaw1/Bookup/blob/master/doc/db-rapport.md)
+#### [Test](https://github.com/mawmaw1/Bookup/blob/master/doc/test-rapport.md)
 
 ## IP's
 
