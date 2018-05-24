@@ -2,6 +2,7 @@ const _startDate = Symbol();
 const _endDate = Symbol();
 const _getDifferenceInMs = Symbol();
 
+
 function Timer(){
     this[_startDate] = null;
     this[_endDate] = null;
