@@ -7,6 +7,12 @@ Direkte links til rapporter:
 #### [Database](https://github.com/mawmaw1/Bookup/blob/master/doc/db-rapport.md)
 #### [Test](https://github.com/mawmaw1/Bookup/blob/master/doc/test-rapport.md)
 
+### Gruppe 4
+- Kristoffer Noga
+- Christopher Borum
+- Kristian Nielsen
+- Magnus Larsen
+
 ## IP's
 
 
