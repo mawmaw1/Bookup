@@ -21,7 +21,7 @@ Vi har ved hjælp af TDD også refaktoreret koden som konsekvens af de tests der
 ## Test pyramiden
 Ifølge test pyramiden bør man have langt flere low-level unit tests end high level end-to-end tests, der kører gennem et GUI. Test pyramiden illustrerer, hvordan omkostninger stiger jo højere op i pyramiden man udfører tests. Det er derfor langt billigere at lave unit tests end frontend/GUI tests. Test pyramiden er opdelt i tre lag: Unit-laget, service-laget og UI-laget. 
 
-Vi har gjort brug af tests i alle tre lag i vores projekt, men vi har flere unit og service tests end UI-tests. Som Martin Fowler beskriver det i hans artikel bør UI-test være et ”second line of defence”, og ikke det primære grundlag for tests. 
+Vi har gjort brug af tests i alle tre lag i vores projekt, men vi har flere unit og service tests end UI-tests. Som Martin Fowler beskriver det i hans [artikel](https://martinfowler.com/bliki/TestPyramid.html) bør UI-test være et ”second line of defence”, og ikke det primære grundlag for tests. 
 Det giver også sig selv, fordi vi ikke præcist kan konkludere, hvad der er galt, hvis en test fejler i frontenden. 
 Vi har derfor haft et større fokus på unit- og servicelaget, og derfor findes der også flere tests i vores system her. 
 Det mest brugbare lag i vores projekt har været unit-laget, da den mest essentielle kode i systemet bliver udført her. Der findes ikke særlig mange funktioner og derfor heller ikke mange tests, men de tests, der snakker sammen med databaserne har været værdifulde, fordi de er med til at sikre dataintegritet. 
