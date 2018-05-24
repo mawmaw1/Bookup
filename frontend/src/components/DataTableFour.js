@@ -22,7 +22,7 @@ class DataTableFour extends React.Component {
                                 <th className="width-50p">Cities mentioned <span className="float-right not-fat">{this.props.amount} matches - Showing: {this.state.limit}</span> </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id = "query4Table">
                             {
                                 this.props.data.map((d, index) => {
                                     if (index <= this.state.limit) {

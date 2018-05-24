@@ -22,7 +22,7 @@ class DataTableOne extends React.Component {
                                 <th className="width-50p">Author(s) name(s) <span className="float-right not-fat">{this.props.amount} matches - Showing: {this.state.limit}</span> </th>
                             </tr>
                         </thead>
-                        <tbody id='rowtbody' >
+                        <tbody id='query1Table' >
                             {
                                 this.props.data.map((d, index) => {
                                     if (index <= this.state.limit) {
