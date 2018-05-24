@@ -74,6 +74,8 @@ Jacoco og Istanbul er begge værktøjer til code coverage. Disse værktøjer bru
 
 I vores løsning brugte vi Istanbul som udover at være et af de mest populære code coverage frameworks til node også er rigtig godt integreret med vores test framework: Jest. Dette gjorde opsætningen problemfri, og vi fik derfor code coverage uden omkostninger i form af omstændigt arbejde med opsætning og konfigurering. Det resulterede i at vi, ved kørsel af vores test suite, fik genereret code coverage rapporter, som vi gjorde tilgængelige på vores server. Med de metrikker der blev stillet til rådighed kunne vi derfor nemt holde øje med vores code coverage og sikre at vi havde en fornuftig dækningsgrad gennem vores tests.
 
+![code coverage](https://github.com/mawmaw1/Bookup/blob/master/doc/code-coverage.PNG)
+
 ## **CI/CD**
 
 I forbindelse med vores projekt, har vi benyttet os af en ’Continuous Integration / Continuous Delivery’ strategi. Vi valgte at bruge en sådan strategi for at sikre en hurtig, effektiv og gennemtestet deployment af vores applikation. I den forbindelse valgte vi at bruge en dedikeret Jenkins-buildserver, samt Docker-containers til at indeholde vores front- og backend systemer, samt Docker-containers indeholdende vores PostgreSQL- og MongoDB databasesystemer.
