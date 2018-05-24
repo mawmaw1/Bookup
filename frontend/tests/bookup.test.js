@@ -104,7 +104,7 @@ test('#4 - Verify Postgres Query 4 ', async () => {
 test('#5 - Verify Mongo Query 1 ', async () => {
     try {
         await timeout(timeoutMs)
-        let mongo = await driver.findElement(By.id('mongo')).click()
+        let mongo = await driver.findElement(By.id('mongoNavBar')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Copenhagen')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
         await timeout(timeoutMs)

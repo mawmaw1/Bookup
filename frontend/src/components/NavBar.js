@@ -29,7 +29,7 @@ class NavBar extends React.Component {
                             <a className="nav-link" href="#/">Postgres</a>
                         </li>
                         <li className={`nav-item ${getActive(2)}`} onClick={() => this.setState({'selectedTab': 2})}>
-                            <a id= "mongo" className="nav-link" href="#/mongo">MongoDB</a>
+                            <a id= "mongoNavBar" className="nav-link" href="#/mongo">MongoDB</a>
                         </li>
 
                     </ul>
