@@ -1,6 +1,47 @@
 #### Bojs præsenterer...
 # Test Rapport - *Det' bra kuk*
 
+## Test Driven Development
+TDD går I al sin enkelthed ud på at udvikle software gennem specifikke test cases – man skriver først tests og derefter kode. TDD er delt op i 5 hoveddele: Add a test, see tests fail, write code, run tests og refactor. Herefter gentages disse 5 trin. 
+Konceptet TDD skulle gerne være med til at naturligt udvikle simple designs og give tillid til udviklerne. 
+
+Set over hele forløbet har TDD ikke været en drivende faktor i vores udvikling. Opgaven består af fire forskellige databasekald, og systemet er derfor relativ nemt at kode. Det kræver ikke kompleks eller omfattende business-logik, men i højere grad bare et REST-API og nogle databasekald fra backenden. Af den årsag har vi også haft svært ved at indføre tests tidligt i forløbet, da programmet bare skal kunne returnere nogle queries til en frontend. 
+Vi kunne f.eks. have valgt at bruge mocks meget tidligt i forløbet, men da vi ikke havde databaserne oppe at køre og heller ikke havde importeret data (det tog lang tid og mange forsøg) var det relativt svært at designe mocks der skulle repræsentere det endelige data. 
+
+Ved hjælp af mocking havde vi hurtigere kunne skrive tests og begynde at udforme de specifikke queries. Det havde uden tvivl været en fordel at have tests allerede inden vi gik i gang med kodningen af resten af programmet, da vi med tests altid kunne køre en given test og være sikker på, at kaldet mod databasen ikke havde ændret sig – eller hvis en test pludselig fejlede, at data i databasen havde ændret sig, og at det derfor burde undersøges.   
+Ved at mocke meget tidligt i forløbet var der dog en chance for, at vi ville ende op med ikke særlig relevante tests. Da vores kode næsten udelukkende snakker sammen med en database kan mocking godt gå hen og blive en smule ugyldigt fordi man ender med at teste et mocking framework mere end den endelige data. Når man mocker angiver man specifikt, hvordan data ser ud og hvordan det skal opføre sig. Man ved dermed på forhånd, hvornår en tilhørende test fejler eller ikke. 
+
+Der er skrevet tests både til vores PostgreSQL og MongoDB database og vi har ved hjælp af disse tests altid kunne sikre os, at data i databasen er som vi forventer. 
+Vi har som sagt derfor ikke brugt TDD helt efter hensigten, men hvis der skulle videreudvikles på systemet har vi et godt fundament i form af de tests vi har skrevet til systemet. De sikrer at vi med sikkerhed ved, at data i databasen ikke er ændret, fordi vi ved hvad vi bør få tilbage på de givne kald. Det ville derfor være fordelagtigt at bruge TDD i højere grad hvis man skulle videreudvikle. 
+Det giver en enorm sikkerhed i en eventuel fremtidig udvikling fordi man altid kan køre alle tests inden man deployer og dermed være sikker på, at data er intakt. 
+Det havde selvfølgelig været væsentligt sværere at regne med disse tests hvis systemet tillod at skrive til databasen. 
+
+Vi har ved hjælp af TDD også refaktoreret koden som konsekvens af de tests der er blevet skrevet. Alle tests kræver en forbindelse til databaserne, og vi var derfor nødsaget til at oprette connect() og disconnect() funktioner som følge af vores tests. Førhen connectede koden automatisk til databaserne når man instantierede postgres og mongo objekterne, men vi ville gerne være i stand til at forbinde og afbryde forbindelserne ved hver individuel test suite. Det gjorde koden mere læsbar og gav os mere kontrol.
+
+## Test pyramiden
+Ifølge test pyramiden bør man have langt flere low-level unit tests end high level end-to-end tests, der kører gennem et GUI. Test pyramiden illustrerer, hvordan omkostninger stiger jo højere op i pyramiden man udfører tests. Det er derfor langt billigere at lave unit tests end frontend/GUI tests. Test pyramiden er opdelt i tre lag: Unit-laget, service-laget og UI-laget. 
+
+Vi har gjort brug af tests i alle tre lag i vores projekt, men vi har flere unit og service tests end UI-tests. Som Martin Fowler beskriver det i hans artikel bør UI-test være et ”second line of defence”, og ikke det primære grundlag for tests. 
+Det giver også sig selv, fordi vi ikke præcist kan konkludere, hvad der er galt, hvis en test fejler i frontenden. 
+Vi har derfor haft et større fokus på unit- og servicelaget, og derfor findes der også flere tests i vores system her. 
+Det mest brugbare lag i vores projekt har været unit-laget, da den mest essentielle kode i systemet bliver udført her. Der findes ikke særlig mange funktioner og derfor heller ikke mange tests, men de tests, der snakker sammen med databaserne har været værdifulde, fordi de er med til at sikre dataintegritet. 
+
+Vi har også tests i service-laget, som tester vores REST-API. De er med til at sikre, at serveren er oppe at køre korrekt og at vi kan tilgå vores databasekald korrekt gennem API’et. 
+
+Vi har brugt Selenium til at udføre tests i frontenden, men det har også været de mest omfattende tests at sætte op. Som det bliver beskrevet i test-pyramiden, bliver det dyrere jo højere op i lagene man går, og det har vi også oplevet i dette projekt. Først og fremmest er der meget manuelt arbejde involveret i at sætte Selenium op, og det er også tidskrævende at skrive tests, fordi man skal have styr på xpaths osv.
+Udover dette kræver Selenium også en driver for at virke. Det er relativt nemt at få til at virke på ens egen lokale computer, men det bliver en smule mere omfattende og kompliceret, når man gerne vil have sine Selenium-tests til at virke på den remote server vi bruger til at deploye alt koden. Den består af et simpelt Ubuntu-image og har derfor ikke en browser installeret. 
+
+## The agile testing quadrants
+The agile testing quadrants giver et overblik over de forskellige typer tests, og kan være med til at sikre at man som team dækker alle slags tests. 
+
+Da projektet ikke har haft nogen Scrum owner eller anden type person der har trukket udviklingen i en business-facing retning, har vi helt naturligt dækket de kvadranter der læner sig op af ”supporting the team”. Vi har med andre ord primært udført tests der dækkes i Q1 og Q2. Projektet har ikke haft en stor del af business-logik, og der har derfor heller ikke været stor fokus på at lave tests, der sikrede at real-time-scenarios blev dækket. Derfor er Q3 tests i en meget lille grad blevet dækket. Vi har adskillige gange manuelt testet frontenden for at sikre, at den viste det vi forventede, men det er ikke gjort med en systematisk test tilgang. Vi har i højere grad selv manuelt testet og evt. fixet en given fejl.
+Q4 er slet ikke blevet dækket, da det ikke var et krav i opgaveformuleringen at systemet skulle kunne skaleres eller at systemet skulle håndtere en stor mængde load og der var heller ikke nogen krav om performance. 
+
+Q1 dækker vi i form af vores unit-tests. De er derfor også automatiserede, og er i høj grad med til at støtte teamet, og har ikke nogen decideret business-value. De giver dog en teknologisk værdi fordi den fremtidige udvikling bliver mere sikker. 
+Q2 dækker vi i form af acceptance tests. De er med til at sikre, at systemet også formår at løse de opgaver, der kræves af opgaveformuleringen. De har en høj business-value fordi de er med til at sikre, og bevise, at systemet løser opgaverne korrekt. Således kunne en evt. product owner få dokumentation på, at systemet opfører sig som forventet. 
+Acceptance-testene er både automatiserede og manuelle. Vha. Selenium kan vi automatisk køre tests, der tjekker om frontenden returnerer det data vi forventer med et givent input. Ligeledes sikrer de manuelle acceptance-tests, at systemet returnerer det rigtige data, men også på en forståelig og brugervenlig måde. Til sammen sikrer de manuelle og automatiserede tests at vi dækker Q2 og giver en business-value. 
+
+
 ## Unit Tests
 
 Unit tests designes til at teste små dele af koden, ofte funktioner/metoder. En god unit test suite gør det muligt at teste store dele af ens kode, på det atomiske plan, og sikre at alle funktioner fungerer som forventet, det vil sige som man har beskrevet i sine unit tests. En god unit test beskriver derfor klart og tydeligt, hvad resultatet af et givent funktionskald bør være, baseret på det input man giver funktionen. Dette afgrænses ikke kun til at hvad funktionen returnere, men også om den smider exceptions ved ugyldigt input og, hvis den er en del af et objekt, om den ændrer tilstand som forventet. Skal man få det bedste ud af unit tests er det derfor ikke nok bare at skrive gode tests, men også at opbygge sin kode så den praktisk giver mening at unit teste, da mere komplekse funktioner er sværere at teste. Dette klan bl.a. gøres ved at designe sine funktioner efter ”single purpose” princippet, altså sikre at en given funktion har et klart definerbart formål eller ansvar.
