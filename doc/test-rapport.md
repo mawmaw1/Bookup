@@ -56,6 +56,8 @@ I forbindelse med opstarten på vores projekt, noterede vi os de bruger-accept t
 
 Øvelsen i at lave disse accept-tests, var medvirkende til at sætte en tankeproces i gang for gruppen, og det gav os mulighed for at have et godt udgangspunkt for vores udvikling, og noget som vi løbende kunne vende tilbage til, og sætte flueben ved, når accept-tests kunne udføres uden fejl og dermed godkendes. Vores brug af accept-tests, gjorde det desuden nemmere at lave automatiserede tests, da vi kunne bruge dem som skabelon for, hvad vores automatiserede tests skulle teste.
 
+Vores accept-tests kan ses [her](https://github.com/mawmaw1/Bookup/blob/master/doc/AcceptTest.md).
+
 ## **UI Testing**
 
 Vi har i løbet af vores udvikling løbende testet vores grafiske brugergrænseflade. Vi har både testet manuelt, og benyttet os af automatiserede løsninger. For blandt andet at give vores build-server mulighed for automatisk at teste vores brugergrænseflade, benyttede vi os af Selenium-Webdriver. Med denne løsning sikrede vi først og fremmest at vores grænseflade blev testet på en måde, hvor vi ved præcist hvilke dele og i hvilken sammenhæng testene bliver udført. Herudover gav denne løsning os mulighed for at teste vores system, i et isoleret miljø på vores build-server. I forhold til at sidde manuelt og teste, sparede det os yderligere en masse tid, da en Selenium-test er væsentlig hurtigere til at udføre en given test, end hvis man manuelt skulle teste sit system igennem. Dette kommer især til udtryk på de queries, som tager længere tid end andre, og hvor man ønsker at teste flere gange i træk.
