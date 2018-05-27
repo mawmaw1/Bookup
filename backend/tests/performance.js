@@ -23,13 +23,14 @@ const coordinates = [
 
 async function runQueries(db, fns){
     await db.connect();
-    const totalT = new Timer();
+
+    // const totalT = new Timer();
     const citiesT = new Timer();
     const booksT = new Timer();
     const authorsT = new Timer();
     const coordinatesT = new Timer();
 
-    totalT.start();
+    // totalT.start();
 
     const isObj = (o) => typeof o === 'object' && o !== null;
     const time = (timer, collection, fn) => {
@@ -56,13 +57,13 @@ async function runQueries(db, fns){
     }
 
     // process queries in parallel
-    await Promise.all(singleQueryPromises.map(f => f()));
+    // await Promise.all(singleQueryPromises.map(f => f()));
 
-    totalT.stop();
+    // totalT.stop();
     db.disconnect();
 
     return {
-        'total_time': totalT.elapsed,
+        'total_time': [citiesT.elapsed, booksT.elapsed, authorsT.elapsed, coordinatesT.elapsed].reduce((acc, curr) => {return acc + curr}, 0),
         'query_one': citiesT.elapsed,
         'query_two': booksT.elapsed,
         'query_three': authorsT.elapsed,
