@@ -19,8 +19,6 @@ const coordinates = [
     { lng: -74, lat: 40.72 }
 ];
 
-
-
 async function runQueries(db, fns){
     await db.connect();
 
@@ -107,7 +105,7 @@ async function runner() {
         console.log('')
     };
 
-    const labels = ['total_time', 'query_one', 'query_two', 'query_three', 'query_four',];
+    const labels = ['total_time', 'query_one', 'query_two', 'query_three', 'query_four'];
 
     labels.forEach(print);
 
