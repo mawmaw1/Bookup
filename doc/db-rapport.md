@@ -102,7 +102,7 @@ En analyse af et af vores queries så sådan ud:
 
 Her fremgår det at vores query resultere i to sekventielle skanninger, hvilket tager en del ekstra tid. Ved at oprette indexes på ’book_author.bookid’ og ’city.name’ blev query’en udført lidt mere effektivt:
 
-![PG Query Planner Post](https://github.com/mawmaw1/Bookup/blob/master/doc/query%20analyse/explain_analyze_pre(seq_marked).png)
+![PG Query Planner Post](https://github.com/mawmaw1/Bookup/blob/master/doc/query%20analyse/explain_analyze_post(index_scan_marked).png)
 
 Resultaterne af dette kunne også ses i vores performance tests, hvor tiden det tog at eksekvere de forskellige queries drastisk blev reduceret efter oprettelse af indexes. 
 
