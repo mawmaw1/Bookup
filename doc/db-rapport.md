@@ -1,4 +1,4 @@
-# 1. Hvilke databaser er brugt
+# 1. Which database engines are used.
 
 Vi har i løbet af semestret modtaget undervisning i key-value, relationel, graf samt dokumentorienterede databasesystemer. I forhold til denne opgave overvejede vi hvilke databasesystemer der gav mest mening at benytte, baseret på både det data som vores systemer skulle håndtere og arbejde med, samt på vores egne erfaringer fra semesterets undervisning.
 
