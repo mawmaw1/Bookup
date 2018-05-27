@@ -35,45 +35,50 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
     // Can return multiple cities with same name
 
     // exceeds document size
-    // City.aggregate([
-    //     { $match: { cityName } },
-    //     {
-    //         $lookup: {
-    //             from: "books",
-    //             let: { "cityId": "$cityId" },
-    //             pipeline: [
-    //                 {
-    //                     $match: { "$$cityId": "$cityRefs"}
-    //                 }
-    //             ],
-    //             as: "books"
-    //         }
-    //     },
-    //     { $project: { books: true } }
-    // ])
-    //     .then((cities) => {
-    //         let allBooks = [];
-
-    //         for (let city of cities) {
-    //             allBooks = allBooks.concat(city.books)
-    //         }
-
-    //         resolve(allBooks);
-    //     })
-    //     .catch(reject);
-
-    City.find({ cityName })
-        .then(async (cities) => {
+    City.aggregate([
+        { $match: { cityName } },
+        {
+            $lookup: {
+                from: "books",
+                let: { "cityId": "$cityId" },
+                pipeline: [
+                    {
+                        $match: { 
+                            $expr: { $in: ["$$cityId", "$cityRefs"]}
+                        }
+                    },
+                    { $project: { title: true, authors: true } }
+                ],
+                as: "books"
+            }
+        },
+        { $project: { books: true } }
+    ])
+        .then((results) => {
             let allBooks = [];
 
-            for (const city of cities) {
-                const books = await Book.find({ cityRefs: city.cityId }, 'id title authors');
-                allBooks = allBooks.concat(books);
+            // sometimes there are two cities with the same name
+            // need to make sure we get both results - use 'Liverpool' as an example
+            for (let res of results) {
+                allBooks = allBooks.concat(res.books)
             }
 
             resolve(allBooks);
         })
         .catch(reject);
+
+    // City.find({ cityName })
+    //     .then(async (cities) => {
+    //         let allBooks = [];
+
+    //         for (const city of cities) {
+    //             const books = await Book.find({ cityRefs: city.cityId }, 'id title authors');
+    //             allBooks = allBooks.concat(books);
+    //         }
+
+    //         resolve(allBooks);
+    //     })
+    //     .catch(reject);
 });
 
 // Given a book title, your application plots all cities mentioned in this book onto a map.
