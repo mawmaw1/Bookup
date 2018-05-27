@@ -9,16 +9,16 @@ const client = new Client({
 });
 
 exports.connect = () => {
-    client.connect().then(() => {
+    client.on('error', (err) => {
+        console.error('there is something with wrong!', err.stack)
+    })
+
+    return client.connect().then(() => {
         const e = (key) => process.env[key];
         console.log('connected to',
             `postgres://${e('POSTGRES_USER')}:${e('POSTGRES_PW')}@${e('POSTGRES_HOST')}:${e('POSTGRES_PORT')}/${e('POSTGRES_DB')}`)
     }).catch(err => {
         console.log(err);
-    })
-    
-    client.on('error', (err) => {
-      console.error('there is something with wrong!', err.stack)
     })
 }
 

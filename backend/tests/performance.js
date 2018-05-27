@@ -22,7 +22,7 @@ const coordinates = [
 
 
 async function runQueries(db, fns){
-    db.connect();
+    await db.connect();
     const totalT = new Timer();
     const citiesT = new Timer();
     const booksT = new Timer();
@@ -39,12 +39,24 @@ async function runQueries(db, fns){
         })
     };
 
-    await Promise.all([
-        time(citiesT, cities, db[fns[0]]),
-        time(booksT, books, db[fns[1]]),
-        time(authorsT, authors, db[fns[2]]),
-        time(coordinatesT, coordinates, db[fns[3]])
-    ]);
+    const singleQueryPromises = [
+        () => time(citiesT, cities, db[fns[0]]),
+        () => time(booksT, books, db[fns[1]]),
+        () => time(authorsT, authors, db[fns[2]]),
+        () => time(coordinatesT, coordinates, db[fns[3]])
+    ];
+
+    // process queries in sequence
+    let queryNumber = 1;
+    for(const singleQuery of singleQueryPromises){
+        console.log(`starting query ${queryNumber}`);
+        await singleQuery();
+        console.log(`finished query ${queryNumber}`);
+        queryNumber++;
+    }
+
+    // process queries in parallel
+    await Promise.all(singleQueryPromises.map(f => f()));
 
     totalT.stop();
     db.disconnect();
@@ -60,8 +72,9 @@ async function runQueries(db, fns){
 
 async function runner() {
 
-    const mongores = await runQueries(mongo, ['getBooksMetionCity', 'getCitiesFromBook', 'getCitiesAndBooksFromAuthor', 'getBooksNearLocation']);
     const pgres = await runQueries(postgres, ['query1', 'query2', 'query3', 'query4']);
+    const mongores = await runQueries(mongo, ['getBooksMetionCity', 'getCitiesFromBook', 'getCitiesAndBooksFromAuthor', 'getBooksNearLocation']);
+
 
     console.log('');
     console.log('  RESULTS  ');
