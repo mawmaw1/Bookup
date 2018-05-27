@@ -12,17 +12,17 @@ Vi syntes desuden at brugen af en NoSQL database til et projekt som dette var me
 
 Modellering af data har stor indflydelse på et system. Det er vigtigt at udforme modeller der lever op til de krav der stilles, og som underbygger en solid struktur for hele systemet. Vi tog derfor udgangspunkt i opgavebeskrivelsen og de krav der var til projektet, og udformede et fælles ER Diagram der var basis for de mere platform-specifikke modeller til vores MongoDB og PostgreSQL databaser:
 
-![image alt text](image_0.png)
+![ER Diagram](https://github.com/mawmaw1/Bookup/blob/master/doc/diagrammer/erd.png)
 
 Med henblik på **PostgreSQL** lavede vi, ud fra vores ERD, et diagram der afspejlede tabel-strukturen i databasen, og som indeholdte primary- og foreign keys samt deres relationer:
 
-![image alt text](image_1.png)
+![Postgres Data Model](https://github.com/mawmaw1/Bookup/blob/master/doc/diagrammer/pg_data_model.png)
 
 Dette gjorde det nemt at oprette selve tabellerne i databasen, da det blot var et spørgsmål om at finde de korrekte datatyper til tabellernes kolonner.
 
 Med henblik på **MongoDB** besluttede vi at bruge frameworket Mongoose, der giver mulighed for at bruge JSON-schemas til at få data-struktur og validering i MongoDB. Vi lavede følgende diagram der beskriver struktur samt datatyper for de forskellige entiteter, i en form der passer til det JSON-format vores schemas udformes i:
 
-![image alt text](image_2.png)
+![Mongo Data Model](https://github.com/mawmaw1/Bookup/blob/master/doc/diagrammer/mongo_data_model.png)
 
 Diagrammet beskriver derudover relationer mellem entiteter, der også er en hjælp til udformning af vores JSON-schemas.
 
@@ -32,13 +32,13 @@ Med henblik på at kunne sammenligne de to databaser bedst muligt, valgte vi at 
 
 I **PostgreSQL** opsatte vi følgende indexes:
 
-![image alt text](image_3.png)
+![Postgres Indexes](https://github.com/mawmaw1/Bookup/blob/master/doc/postgres-indexes.png)
 
 Der er, per default, indexes på alle primary keys. Derudover oprettede vi indexes på foreign keys i book_city og book_author tabellerne for at optimere joins, og indexes på nogle af de felter vi filtrere på i vores queries (city_name og city_point).
 
 I **MongoDB** så vores indexes således ud:
 
-![image alt text](image_4.png)
+![Mongo Indexes](https://github.com/mawmaw1/Bookup/blob/master/doc/indexes.png)
 
 Her fulgte vi samme fremgangsmåde og indexerede på cityRefs, for at optimere joins, samt authors, location og cityName for at optimere filtrering.
 
@@ -56,7 +56,7 @@ Da vi satte frontenden op brugte vi i første omgang resultaterne fra PostgreSQL
 
 Et eksempel på hvordan data er modelleret i applikationen kunne være fra query1 i **PostgreSQL**: 
 
-![image alt text](image_5.png)
+![PG Query 1 Data](https://github.com/mawmaw1/Bookup/blob/master/doc/postgres_data.png)
 
 Det tilsvarende data fra MongoDB ser som beskrevet ovenover derfor næsten ens ud. 
 
@@ -84,7 +84,7 @@ Including a discussion on how much of the query runtime is influenced by the DB 
 
 Når man bruger vores frontend til at udføre de forskellige queries bliver dataen sendt over HTTP i JSON-format, som tager næsten lige så lang tid at downloade på frontenden som kaldet i sig selv. Dette kan ses i et browser developer tool:
 
-![image alt text](image_6.png)
+![Frontend Http Timing](https://github.com/mawmaw1/Bookup/blob/master/doc/frontend-timing.png)
 
 De queries der giver et stort resultat tager derfor en del længere tid for browseren at håndtere. Af denne grund har vi valgt ikke at teste performance gennem frontenden, men udelukkende direkte på databaserne gennem backenden. På den måde er vi sikre på at vores performance test ikke er påvirket af browseren eller React.js. 
 
@@ -98,11 +98,11 @@ For at få mere indsigt i de forskellige queries brugte vi nogle af de indbygged
 
 En analyse af et af vores queries så sådan ud:
 
-![image alt text](https://raw.githubusercontent.com/mawmaw1/Bookup/master/doc/performance-pre-index.png)
+![PG Query Planner Pre](https://github.com/mawmaw1/Bookup/blob/master/doc/query%20analyse/explain_analyze_pre(seq_marked).png)
 
 Her fremgår det at vores query resultere i to sekventielle skanninger, hvilket tager en del ekstra tid. Ved at oprette indexes på ’book_author.bookid’ og ’city.name’ blev query’en udført lidt mere effektivt:
 
-![image alt text](https://raw.githubusercontent.com/mawmaw1/Bookup/master/doc/performance-post-index.png)
+![PG Query Planner Post](https://github.com/mawmaw1/Bookup/blob/master/doc/query%20analyse/explain_analyze_pre(seq_marked).png)
 
 Resultaterne af dette kunne også ses i vores performance tests, hvor tiden det tog at eksekvere de forskellige queries drastisk blev reduceret efter oprettelse af indexes. 
 
@@ -116,11 +116,11 @@ Indeksering har selvfølgelig også en pris og gør INSERT og UPDATE operationer
 
 For at oprette indexes og have mulighed for at se deres effekt på query performance, var det nødvendigt at oprette en form for test, så vi løbende kunne holde styr på hvordan performance ændrede sig når vi oprettede indexes. Derfor oprettede vi **performance.js** filen, som ved eksekvering kørte en række queries op imod vores to databaser. Hver type query kørte i sekvens, og løbende blev der holdt styr på hvor lang tid de forskellige typer queries tog. Når alle queries var færdige, blev resultaterne printet. Gennem udviklingen var det meget nyttigt løbende at kunne teste performance på den måde, da man med det samme kunne få feedback på de ændringer man lavede. På følgende billede ses resultatet af vores performance-tests før vi oprettede indexes:
 
-![image alt text](image_10.png)
+![Performance Pre Index](https://github.com/mawmaw1/Bookup/blob/master/doc/performance-pre-index.png)
 
 Samt et billede af vores resultater efter oprettelse af indexes:
 
-![image alt text](image_11.png)
+![Performance Post Index](https://github.com/mawmaw1/Bookup/blob/master/doc/performance-post-index.png)
 
 total_time beskriver hvor lang tid det tog for den givne database at eksekvere alle 20 queries (5 per type). Derefter følger individuelle mål på, hvor lang tid de forskellige typer queries tog (i sidste billede er der også procenter der angiver, hvor meget hurtigere den vindende engine var). Det vil sige at tallene under query_one eksempelvis beskriver hvor lang tid de to engines hver især var om at udføre de 5 queries af den pågældende type (bøger der nævner en specifik by). De to databaser brugte de samme byer, bøger, authors etc. i deres queries for at sikre at tests var lige.
 
