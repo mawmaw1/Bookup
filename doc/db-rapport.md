@@ -98,11 +98,11 @@ For at få mere indsigt i de forskellige queries brugte vi nogle af de indbygged
 
 En analyse af et af vores queries så sådan ud:
 
-![image alt text](image_7.png)
+![image alt text](https://raw.githubusercontent.com/mawmaw1/Bookup/master/doc/performance-pre-index.png)
 
 Her fremgår det at vores query resultere i to sekventielle skanninger, hvilket tager en del ekstra tid. Ved at oprette indexes på ’book_author.bookid’ og ’city.name’ blev query’en udført lidt mere effektivt:
 
-![image alt text](image_8.png)
+![image alt text](https://raw.githubusercontent.com/mawmaw1/Bookup/master/doc/performance-post-index.png)
 
 Resultaterne af dette kunne også ses i vores performance tests, hvor tiden det tog at eksekvere de forskellige queries drastisk blev reduceret efter oprettelse af indexes. 
 
