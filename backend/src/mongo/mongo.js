@@ -91,16 +91,20 @@ exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
         },
         { $project: { 'city': true, '_id': false } }
     ])
-        .then((cities) => {
-            cities = cities.map((e) => {
-                return {
-                    cityId: e.city[0].cityId,
-                    name: e.city[0].cityName,
-                    latitude: e.city[0].location.coordinates[1],
-                    longitude: e.city[0].location.coordinates[0]
-                }
-            })
-            resolve(cities)
+        .then((results) => {
+            let allCities = []
+            for (let cities of results) {
+                cities = cities.city.map((city) => {
+                    return {
+                        cityId: city.cityId,
+                        name: city.cityName,
+                        latitude: city.location.coordinates[1],
+                        longitude: city.location.coordinates[0]
+                    }
+                })
+                allCities = allCities.concat(cities)
+            }
+            resolve(allCities)
         })
         .catch(reject)
 })
