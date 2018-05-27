@@ -75,7 +75,6 @@ exports.query4 = (lat, long) => {
         JOIN city USING (cityid) 
         WHERE position <@> point (${long}, ${lat}) < 6.21371192 
         GROUP BY book.bookid
-        ORDER BY book.title;
     `)
     return res
 }
