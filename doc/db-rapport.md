@@ -108,7 +108,7 @@ Resultaterne af dette kunne også ses i vores performance tests, hvor tiden det 
 
 Vi brugte også redskaber i MongoDB, til at få lidt mere information omkring query planning:
 
-![image alt text](image_9.png)
+![Mongo Query Planner](https://github.com/mawmaw1/Bookup/blob/master/doc/query%20analyse/mongo_explain.png)
 
 Indeksering har selvfølgelig også en pris og gør INSERT og UPDATE operationer langsommere for den tabel der indekseres (fordi indexes altid skal opdateres når data ændres). Vores projekt gik dog ud på at lave en applikation hvor der eksklusivt skulle foretages read operationer og derfor havde vi ret stor frihed i forhold til at udnytte indeksering. Man skal dog være opmærksom på at indeksering kan have omkostninger og kun bør bruges når man ved at der er et reelt udbytte at hente i den øgede performance man får ved read operationer.
 
