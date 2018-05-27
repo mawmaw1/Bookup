@@ -82,7 +82,6 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
 exports.getCitiesFromBook = (title) => new Promise((resolve, reject) => {
     Book.aggregate([
         { $match: { title } },
-        { $unwind: '$cityRefs' },
         {
             $lookup:
                 {
