@@ -80,12 +80,29 @@ async function runner() {
     console.log('  RESULTS  ');
     console.log('');
 
+    const limitDecimals = (str) => {
+        str = str.toString();
+        //limit to 2 decimals
+        const dotIndex = str.indexOf('.');
+        if(dotIndex === -1) return str;
+        return str.substring(0, dotIndex + 3);
+    };
+
+    const getPctDiff = (resA, resB) => {
+
+        const diff = (Math.max(resA, resB) / Math.min(resA, resB) * 100) - 100;
+        return  limitDecimals(diff);
+    };
+
     const print = (label) => {
         const mongoWins = Number(mongores[label]) < Number(pgres[label]);
 
+        const pctDiff = getPctDiff(mongores[label], pgres[label]);
+        const pctDiffStr = ` (${pctDiff}% faster)`;
+
         console.log(label);
-        console.log('mongo: ', mongoWins ? colors.green(mongores[label]) : colors.red(mongores[label]));
-        console.log('pg:    ', mongoWins ? colors.red(pgres[label]) : colors.green(pgres[label]));
+        console.log('mongo: ', mongoWins ? colors.green(mongores[label] + pctDiffStr)  : colors.red(mongores[label]));
+        console.log('pg:    ', mongoWins ? colors.red(pgres[label]) : colors.green(pgres[label] + pctDiffStr));
         console.log('')
     };
 
