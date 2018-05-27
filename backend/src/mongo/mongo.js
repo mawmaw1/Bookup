@@ -46,7 +46,8 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
                         $match: { 
                             $expr: { $in: ["$$cityId", "$cityRefs"]}
                         }
-                    }
+                    },
+                    { $project: { title: true, authors: true } }
                 ],
                 as: "books"
             }
