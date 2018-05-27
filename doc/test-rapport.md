@@ -56,6 +56,8 @@ I forbindelse med opstarten på vores projekt, noterede vi os de bruger-accept t
 
 Øvelsen i at lave disse accept-tests, var medvirkende til at sætte en tankeproces i gang for gruppen, og det gav os mulighed for at have et godt udgangspunkt for vores udvikling, og noget som vi løbende kunne vende tilbage til, og sætte flueben ved, når accept-tests kunne udføres uden fejl og dermed godkendes. Vores brug af accept-tests, gjorde det desuden nemmere at lave automatiserede tests, da vi kunne bruge dem som skabelon for, hvad vores automatiserede tests skulle teste.
 
+Vores accept-tests kan ses [her](https://github.com/mawmaw1/Bookup/blob/master/doc/AcceptTest.md).
+
 ## **UI Testing**
 
 Vi har i løbet af vores udvikling løbende testet vores grafiske brugergrænseflade. Vi har både testet manuelt, og benyttet os af automatiserede løsninger. For blandt andet at give vores build-server mulighed for automatisk at teste vores brugergrænseflade, benyttede vi os af Selenium-Webdriver. Med denne løsning sikrede vi først og fremmest at vores grænseflade blev testet på en måde, hvor vi ved præcist hvilke dele og i hvilken sammenhæng testene bliver udført. Herudover gav denne løsning os mulighed for at teste vores system, i et isoleret miljø på vores build-server. I forhold til at sidde manuelt og teste, sparede det os yderligere en masse tid, da en Selenium-test er væsentlig hurtigere til at udføre en given test, end hvis man manuelt skulle teste sit system igennem. Dette kommer især til udtryk på de queries, som tager længere tid end andre, og hvor man ønsker at teste flere gange i træk.
@@ -73,6 +75,8 @@ En vigtig del af testing er, at være klar over hvor meget af ens kode man egent
 Jacoco og Istanbul er begge værktøjer til code coverage. Disse værktøjer bruges i forbindelse med testing, og giver en værdi i form af at afsløre hvor meget af ens kode der egentlig er dækket af tests. De fungerer ved at analysere kodebasen, samt test suites, og ud fra disse vurdere dækningen af ens kode med hensyn til funktioner, linjer, statements og logical branches.
 
 I vores løsning brugte vi Istanbul som udover at være et af de mest populære code coverage frameworks til node også er rigtig godt integreret med vores test framework: Jest. Dette gjorde opsætningen problemfri, og vi fik derfor code coverage uden omkostninger i form af omstændigt arbejde med opsætning og konfigurering. Det resulterede i at vi, ved kørsel af vores test suite, fik genereret code coverage rapporter, som vi gjorde tilgængelige på vores server. Med de metrikker der blev stillet til rådighed kunne vi derfor nemt holde øje med vores code coverage og sikre at vi havde en fornuftig dækningsgrad gennem vores tests.
+
+![code coverage](https://github.com/mawmaw1/Bookup/blob/master/doc/code-coverage.PNG)
 
 ## **CI/CD**
 
@@ -102,3 +106,11 @@ Mocks er efterligninger af objekter, der har samme funktionalitet, men har det f
 
 Vi gjorde ikke særlig brug af mocking eller stubbing da vi ikke løb ind i det problem at vi ikke havde nogen database eller backend klar, eller andre komplikationer. Da vores projekt har meget minimal kode og kompleksitet, besluttede vi, at vi ikke ville få særlig meget ud af at mocke nogen objekters adfærd, da meget af kompleksiteten lå i databasesøgningerne. De forskellige komponenter blev nogenlunde klar til at integrere med hinanden på samme tid. Der blev dog stubbed nogle bøger til noget manuelt testing af backend kald og UI.
 
+## Agil udvikling
+
+Undervejs i projektet har vi ikke haft stor fokus på user-stories eller retrospectives. Vi har generelt ikke følt at opgaven lagde op til disse metoder, da opgavebeskrivelsen var kort og ligetil, og opgaven havde ikke krav der blev ændret hen af vejen. Vi har i højere grad delt udviklingen op i sprints og har i de specifikke sprints haft fokus på forskellige dele af opgaven. 
+Således gik næsten de første to sprints alene med at få data ind i databasen da det viste sig at være en meget udfordrende opgave. Som beskrevet tidligere var det ikke natuligt for os at begynde at teste før vi havde fået styr på database-delen af opgaven. Dette var også grunden til at vi ikke brugte retrospectives, da vi i de to første sprints ikke havde så meget at gennemgå i test-delen af den samlede opgave. 
+
+Som team har vi fordelt opgaverne lige imellem os og har stået for specikke dele af systemet hver især. Vi har dog natuligt udført code reviews af hinandens kode hver gang der blev pushet på github. I den forbindelse har vi også sat hinanden ind i nyt kode og generelt har vi som team alle ageret udviklere og testere. 
+
+Generelt har den agile proces været mindre tilstedeværende i dette projekt end tidligere skoleopgaver. Det bunder mest i, at opgavebeskrivelsen som sagt var kort og præcis, og at vi ikke havde en product owner eller kravændringer undervejs. 

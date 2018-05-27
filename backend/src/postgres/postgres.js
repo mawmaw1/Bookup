@@ -35,8 +35,7 @@ exports.query1 = (title) => {
         JOIN city USING (cityid) 
         LEFT OUTER JOIN author ON (author.authorid = book_author.authorid) 
         WHERE city.name = '${title}' 
-        GROUP BY book.bookid
-        ORDER BY book.title; 
+        GROUP BY book.bookid; 
     `)
 
     return res
