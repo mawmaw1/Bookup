@@ -14,7 +14,7 @@ Modellering af data har stor indflydelse på et system. Det er vigtigt at udform
 
 ![image alt text](image_0.png)
 
-Med henblik på **PostgreSQL **lavede vi, ud fra vores ERD, et diagram der afspejlede tabel-strukturen i databasen, og som indeholdte primary- og foreign keys samt deres relationer:
+Med henblik på **PostgreSQL** lavede vi, ud fra vores ERD, et diagram der afspejlede tabel-strukturen i databasen, og som indeholdte primary- og foreign keys samt deres relationer:
 
 ![image alt text](image_1.png)
 
@@ -30,13 +30,13 @@ Diagrammet beskriver derudover relationer mellem entiteter, der også er en hjæ
 
 Med henblik på at kunne sammenligne de to databaser bedst muligt, valgte vi at sætte en række indexes op i både PostgreSQL og MongoDB. Indexering giver databasen mulighed for at udnytte sorterede data-strukturer, såsom binary search trees, til at optimere den måde data tilgås og undgå sekventielle søgninger hvor hver eneste entry i et tabel/collection evalueres. Ved at benytte indexering var vi sikre på at få den bedste repræsentation af de to databasers performance, og på den måde fik vi en mere realistisk sammenligning.
 
-I **PostgreSQL **opsatte vi følgende indexes:
+I **PostgreSQL** opsatte vi følgende indexes:
 
 ![image alt text](image_3.png)
 
 Der er, per default, indexes på alle primary keys. Derudover oprettede vi indexes på foreign keys i book_city og book_author tabellerne for at optimere joins, og indexes på nogle af de felter vi filtrere på i vores queries (city_name og city_point).
 
-I **MongoDB **så vores indexes således ud:
+I **MongoDB** så vores indexes således ud:
 
 ![image alt text](image_4.png)
 
@@ -54,7 +54,7 @@ I alle MongoDB-kald har vi derfor været nødsaget til at udføre noget manuelt 
 
 Da vi satte frontenden op brugte vi i første omgang resultaterne fra PostgreSQL, og det er nok også grunden til at det er MongoDB-resultaterne der bliver lavet om i stedet for PostgreSQL-resultaterne. Vi var dog alle sammen enige om, at PostgreSQL-resultaterne direkte fra databasen var væsentligt pænere end MongoDB-resultaterne. 
 
-Et eksempel på hvordan data er modelleret i applikationen kunne være fra query1 i **Postgre****SQL**: 
+Et eksempel på hvordan data er modelleret i applikationen kunne være fra query1 i **PostgreSQL**: 
 
 ![image alt text](image_5.png)
 
@@ -134,7 +134,7 @@ For which database engine to use in such a project for production.
 
 For endeligt at kunne konkludere en "vinder" eller hvilken database vi ville anbefale kommer det lidt an på i hvilken sammenhæng man skal bruge databaserne.
 
-Vi synes uden tvivl at MongoDB er en langt nemmere database at sætte op og komme i gang med. Det gjorde sig specielt gældende i forhold til at indsætte alt data i databasen, hvor MongoDB’s *mongoimport *gjorde alt arbejdet for os mht. at indsætte data, da den bare skulle bruge en JSON-fil. Til sammenligning var vi som beskrevet tidligere nødt til at udvikle vores eget script til at indsætte data i PostgreSQL og det tog os flere forsøg før vi havde et script der indsatte alt data præcis som vi ville have det.
+Vi synes uden tvivl at MongoDB er en langt nemmere database at sætte op og komme i gang med. Det gjorde sig specielt gældende i forhold til at indsætte alt data i databasen, hvor MongoDB’s *mongoimport* gjorde alt arbejdet for os mht. at indsætte data, da den bare skulle bruge en JSON-fil. Til sammenligning var vi som beskrevet tidligere nødt til at udvikle vores eget script til at indsætte data i PostgreSQL og det tog os flere forsøg før vi havde et script der indsatte alt data præcis som vi ville have det.
 
 Ligeledes var der ikke behov for at tegne et ER-diagram over de specifikke tables i MongoDB, hvilket gjorde sig gældende for PostgreSQL. I en relationel database er man nødt til at modellere databasens udseende og relationer før man overhovedet kan begynde at importere data (hvis man altså ønsker et ordentligt design fra starten), hvorimod MongoDB tillader at man bare kan importere data i forskellige collections.
 
