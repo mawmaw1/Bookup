@@ -64,13 +64,13 @@ Generelt er data modelleret som JSON i alle responses og følger stort set samme
 
 # 4. How the data is imported.	
 
-Vores strategi for at få importeret alle bøgerne, var at downloade nogle forskellige bøger, og udvikle et script der ville finde de byer der matchede byerne i cities15000.txt. Vi fandt hurtigt ud af at det ikke ville virke, at matche alle de ord der startede med stort bogstav, da mange byer består af flere ord. Det ville også tage for lang tid at matche hver by, med hvert ord i tekstfilen, og desuden ville det give forkerte resultater, da nogle bynavne indeholder andre bynavne, for eksempel "York" og “New York City”. 
+Vores strategi for at få importeret alle bøgerne, var at downloade nogle forskellige bøger, og udvikle et [script](https://github.com/mawmaw1/Bookup/blob/master/import/main.go) der ville finde de byer der matchede byerne i cities15000.txt. Vi fandt hurtigt ud af at det ikke ville virke, at matche alle de ord der startede med stort bogstav, da mange byer består af flere ord. Det ville også tage for lang tid at matche hver by, med hvert ord i tekstfilen, og desuden ville det give forkerte resultater, da nogle bynavne indeholder andre bynavne, for eksempel "York" og “New York City”. 
 
 Vi valgte at bruge et natural-language processing bibliotek udviklet af MIT, kaldet MITIE, til at udtrække bynavne. Værktøjet tager noget tekst som input, og returnerer hvilke byer der blev fundet i den givne tekst, som vi derefter kunne matche på byerne i cities15000.txt. 
 
 Bogtitel og forfatter udtrak vi fra meta-dataen i starten af bogen, men da mange bøger havde flere forfattere, som blev skrevet på mange forskellige måder (bl.a. splittet med ",", “and”, “&”, etc.) brugte vi også MITIE til at finde forfatterne, så vi ikke skulle bekymre os en masse forskellig formater. 
 
-Scriptet blev derefter kørt på alle bøgerne, hvilket tog omkring 14 timer, og resultatet blev lagt i en JSON-fil, der nemt kunne importeres af MongoDB via mongoimport. For at importere dataen i PostgreSQL var vi dog nødt til at lave et script der genererede et SQL-script, som PostgreSQL kunne importere.
+Scriptet blev derefter kørt på alle bøgerne, hvilket tog omkring 14 timer, og resultatet blev lagt i en JSON-fil, der nemt kunne importeres af MongoDB via mongoimport. For at importere dataen i PostgreSQL var vi dog nødt til at lave et [script](https://github.com/mawmaw1/Bookup/blob/master/import/postgres-import.js) der genererede et SQL-script, som PostgreSQL kunne importere.
 
 Udviklingen af scriptet gennemgik flere iterationer hvor der blev fikset små fejl, og eksempelvis ændrede vi forfattere fra en streng til et array ved brug af MITIE. Hver fejl var meget tidskrævende, da scriptet som tidligere nævnt tog lang tid at køre, men vi nåede til et punkt hvor vi var tilfredse med vores data.
 
