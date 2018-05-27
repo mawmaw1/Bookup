@@ -53,11 +53,13 @@ exports.getBooksMetionCity = (cityName) => new Promise((resolve, reject) => {
         },
         { $project: { books: true } }
     ])
-        .then((cities) => {
+        .then((results) => {
             let allBooks = [];
 
-            for (let city of cities) {
-                allBooks = allBooks.concat(city.books)
+            // sometimes there are two cities with the same name
+            // need to make sure we get both results - use 'Liverpool' as an example
+            for (let res of results) {
+                allBooks = allBooks.concat(res.books)
             }
 
             resolve(allBooks);
