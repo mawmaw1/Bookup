@@ -14,7 +14,7 @@ let output = '';
 
 const fs = require('graceful-fs');
 
-const jsonStringRaw = fs.readFileSync('books.json').toString();
+const jsonStringRaw = fs.readFileSync('books3.json').toString();
 
 const parsed = JSON.parse(jsonStringRaw);
 
@@ -62,7 +62,7 @@ for(let i = 0; i < parsed.length; i++){
         }
 
         // add book_author
-        bookAuthor = new Book_Author(book._bookid, author._authorid);
+        const bookAuthor = new Book_Author(book._bookid, author._authorid);
         data.book_authors.push(bookAuthor);
     });
 
@@ -160,7 +160,7 @@ function sqlSanitizeVal(val){
     if(Number.isInteger(val)){
         return val;
     }else{
-        return "'" + val.replace(/[']/g, '\'') + "'";
+        return "'" + val.replace(/[']/g, "\\'") + "'";
     }
 }
 
