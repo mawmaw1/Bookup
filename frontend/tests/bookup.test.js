@@ -8,11 +8,11 @@ const timeoutMs = 4000
 beforeAll(async () => {
     try {
 
-        driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
-        //driver = await new Builder().forBrowser('chrome').build()
+        //driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
+        driver = await new Builder().forBrowser('chrome').build()
         
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
     }
     catch (e) {
         console.log(e)
