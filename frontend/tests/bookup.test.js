@@ -10,7 +10,7 @@ beforeAll(async () => {
 
         driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
         //driver = await new Builder().forBrowser('chrome').build()
-        
+
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
     }
@@ -36,10 +36,13 @@ test('#1 - Verify Postgres Query 1 ', async () => {
     try {
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Copenhagen')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
-        let tbody = await driver.findElement(By.id('query1Table'))
+        await driver.wait(until.elementsLocated(By.id('query1Table'), 10000))
+        let tbody = await driver.findElement(By.id('query1Table'));
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
+
+
     }
     catch (e) {
         console.log(e)
@@ -53,9 +56,10 @@ test('#2 - Verify Postgres Query 2 ', async () => {
         await driver.findElement(By.id('query2')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Moby Dick')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
+        await driver.wait(until.elementsLocated(By.id('query2Table'), 10000))
         let tbody = await driver.findElement(By.id('query2Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -70,9 +74,10 @@ test('#3 - Verify Postgres Query 3 ', async () => {
         await driver.findElement(By.id('query3')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Lindsay')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
+        await driver.wait(until.elementsLocated(By.id('query3Table'), 10000))
         let tbody = await driver.findElement(By.id('query3Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -87,9 +92,10 @@ test('#4 - Verify Postgres Query 4 ', async () => {
         await driver.findElement(By.id('query4')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('40.71427, -74.00597')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(3000)
+        await driver.wait(until.elementsLocated(By.id('query4Table'), 10000))
         let tbody = await driver.findElement(By.id('query4Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -100,15 +106,16 @@ test('#4 - Verify Postgres Query 4 ', async () => {
 
 test('#5 - Verify Mongo Query 1 ', async () => {
     try {
-        await timeout(timeoutMs)
+       
         await driver.get('http://localhost:8080/#/mongo')
         //let mongo = await driver.findElement(By.id('mongoNavBar')).click()
-        
+
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Copenhagen')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
+        await driver.wait(until.elementsLocated(By.id('query1Table'), 10000))
         let tbody = await driver.findElement(By.id('query1Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -123,9 +130,10 @@ test('#6 - Verify Mongo Query 2 ', async () => {
         await driver.findElement(By.id('query2')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Moby Dick')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
+        await driver.wait(until.elementsLocated(By.id('query2Table'), 10000))
         let tbody = await driver.findElement(By.id('query2Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -140,9 +148,10 @@ test('#7 - Verify Mogno Query 3 ', async () => {
         await driver.findElement(By.id('query3')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('Lindsay')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(timeoutMs)
+        await driver.wait(until.elementsLocated(By.id('query3Table'), 10000))
         let tbody = await driver.findElement(By.id('query3Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -157,9 +166,10 @@ test('#8 - Verify Mongo Query 4 ', async () => {
         await driver.findElement(By.id('query4')).click()
         let input = await driver.findElement(By.id('queryInput')).sendKeys('40.71427, -74.00597')
         let searchbutton = await driver.findElement(By.id('search-button')).click()
-        await timeout(3000)
+        await driver.wait(until.elementsLocated(By.id('query4Table'), 10000))
         let tbody = await driver.findElement(By.id('query4Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -168,6 +178,3 @@ test('#8 - Verify Mongo Query 4 ', async () => {
 
 })
 
-function timeout(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
