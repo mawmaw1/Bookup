@@ -12,6 +12,7 @@ beforeAll(async () => {
         //driver = await new Builder().forBrowser('chrome').build()
 
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
+        jest.setTimeout(20000);
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
     }
     catch (e) {
