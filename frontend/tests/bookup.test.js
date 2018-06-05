@@ -8,8 +8,8 @@ const timeoutMs = 4000
 beforeAll(async () => {
     try {
 
-        driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
-        //driver = await new Builder().forBrowser('chrome').build()
+        //driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
+        driver = await new Builder().forBrowser('chrome').build()
 
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
@@ -22,6 +22,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
     try {
+        await timeout(timeoutMs)
         await driver.quit();
         console.log("driver is shot")
 
@@ -106,7 +107,7 @@ test('#4 - Verify Postgres Query 4 ', async () => {
 
 test('#5 - Verify Mongo Query 1 ', async () => {
     try {
-       
+        
         await driver.get('http://localhost:8080/#/mongo')
         //let mongo = await driver.findElement(By.id('mongoNavBar')).click()
 
@@ -169,7 +170,6 @@ test('#8 - Verify Mongo Query 4 ', async () => {
         await driver.wait(until.elementsLocated(By.id('query4Table'), 10000))
         let tbody = await driver.findElement(By.id('query4Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
-        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
@@ -178,3 +178,6 @@ test('#8 - Verify Mongo Query 4 ', async () => {
 
 })
 
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
