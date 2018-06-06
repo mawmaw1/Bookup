@@ -171,6 +171,7 @@ test('#8 - Verify Mongo Query 4 ', async () => {
         await driver.wait(until.elementsLocated(By.id('query4Table'), 10000))
         let tbody = await driver.findElement(By.id('query4Table'))
         let rows = await tbody.findElements(By.xpath('.//tr'))
+        console.log(rows.length)
         expect(rows.length).toBeGreaterThan(0)
     }
     catch (e) {
