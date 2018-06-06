@@ -10,7 +10,7 @@ beforeAll(async () => {
 
         driver = await new Builder().forBrowser('chrome').usingServer('http://localhost:4444/wd/hub').build();
         //driver = await new Builder().forBrowser('chrome').build()
-
+        
         await driver.get(process.env.FRONTEND_URL || 'http://localhost:8080/')
         jest.setTimeout(20000);
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
@@ -23,9 +23,9 @@ beforeAll(async () => {
 
 afterAll(async () => {
     try {
-        await timeout(timeoutMs)
-        await driver.quit();
         console.log("driver is shot")
+        await driver.quit();
+        
 
     }
     catch (e) {
