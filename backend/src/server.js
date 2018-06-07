@@ -20,6 +20,6 @@ module.exports = (ip, port) => {
             console.error(err);
             return;
         }
-        console.log(`Server (backend) running on ${ip}:${port}`);
+        console.log(`Server (backend) runnings on ${ip}:${port}`);
     });
 };
